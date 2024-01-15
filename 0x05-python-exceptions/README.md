@@ -1,1 +1,1 @@
-Readme file
+Python exceptions
