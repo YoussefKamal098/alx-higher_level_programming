@@ -2,4 +2,4 @@
 for i in range(0, 10):
     for j in range(i + 1, 10):
         print("{}{}".format(i, j), end="")
-        print(", " if i !=10 else "", end="" if i !=10 else "\n")
+        print(", " if i != 9 else "", end="" if i != 9 else "\n")
