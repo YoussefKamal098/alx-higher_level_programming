@@ -8,19 +8,20 @@ if __name__ == "__main__":
         exit(1)
 
     a = int(sys.argv[1])
-    b = int(sys.argv[2])
+    op = sys.argv[2]
+    b = int(sys.argv[3])
     func = None
 
-    if sys.argv[3] == '+':
+    if op == '+':
         func = add
-    elif sys.argv[3] == '-':
+    elif op == '-':
         func = sub
-    elif sys.argv[3] == '*':
+    elif op == '*':
         func = mul
-    elif sys.argv[3] == '/':
+    elif op == '/':
         func = div
     else:
         print("Unknown operator. Available operators: +, -, * and /")
         exit(1)
 
-    print("{} {} {} = {}".format(a, sys.argv[3], b, func(a, b)))
+    print("{} {} {} = {}".format(a, op, b, func(a, b)))
