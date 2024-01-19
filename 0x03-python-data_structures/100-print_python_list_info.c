@@ -2,8 +2,8 @@
 #include <Python.h>
 
 /**
- * print_python_list_info - prints information about a Python list
- * @p: Pointer to a Python list
+ * print_python_list_info - prints a basic information about a Python list
+ * @p: pointer to a Python object
  */
 void print_python_list_info(PyObject *p)
 {
