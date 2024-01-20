@@ -46,10 +46,10 @@ int helper(listint_t **start, listint_t *end)
 
 	is_palindrome = helper(start, end->next);
 
-	val = (*start)->val;
+	val = (*start)->n;
 	*start = (*start)->next;
 
-	if (val == end->val && is_palindrome)
+	if (val == end->n && is_palindrome)
 		return (1);
 
 	return (0);
