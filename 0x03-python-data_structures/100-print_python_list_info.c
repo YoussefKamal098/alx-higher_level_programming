@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stddef.h>
 #include <Python.h>
 
 /**
@@ -8,7 +7,7 @@
  */
 void print_python_list_info(PyObject *p)
 {
-	size_t size, alloc, i;
+	int size, alloc, i;
 	PyObject *item;
 
 	size = PyList_Size(p);
