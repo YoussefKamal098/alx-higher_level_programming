@@ -60,7 +60,7 @@ void print_python_bytes(PyObject *p)
 
 	for (i = 0; i < size; ++i)
 	{
-		printf("%02hhx", bytes->ob_sval[i]);
+		printf("%02x", bytes->ob_sval[i]);
 
 		if (i == (size - 1))
 			printf("\n");
