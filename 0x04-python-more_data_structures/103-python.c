@@ -63,7 +63,7 @@ void print_python_bytes(PyObject *p)
 		printf("%02hhx", bytes->ob_sval[i]);
 
 		if (i == (size - 1))
-			prinf("\n");
+			printf("\n");
 		else
 			printf(" ");
 	}
