@@ -1,13 +1,13 @@
 #include <Python.h>
 
-void print_python_list_info(PyObject *p);
+void print_python_list(PyObject *p);
 void print_python_bytes(PyObject *p);
 
 /**
- * print_python_list_info - prints a basic information about a Python list
+ * print_python_list - prints a basic information about a Python list
  * @p: pointer to a Python object
  */
-void print_python_list_info(PyObject *p)
+void print_python_list(PyObject *p)
 {
 	int size, alloc, i;
 	const char *type;
