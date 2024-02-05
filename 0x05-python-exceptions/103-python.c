@@ -66,7 +66,7 @@ void print_python_list(PyObject *p)
 	PyListObject *list = (PyListObject *)p;
 	PyVarObject *var = (PyVarObject *)p;
 
-	setbuf(stdout, NULL);
+	fflush(stdout, NULL);
 	printf("[*] Python list info\n");
 
 	if (strcmp(p->ob_type->tp_name, "list"))
