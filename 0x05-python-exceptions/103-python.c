@@ -57,7 +57,7 @@ void print_python_bytes(PyObject *p)
 	{
 		printf("%02hhx%s", str[i]);
 
-		if (i == (size - 1))
+		if (i + 1 == length)
 			printf("\n");
 		else
 			printf(" ");
