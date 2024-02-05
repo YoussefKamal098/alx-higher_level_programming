@@ -40,8 +40,7 @@ void print_python_list(PyObject *p)
 	setbuf(stdout, NULL);
 	printf("[*] Python list info\n");
 
-	type = p->ob_type->tp_name;
-	if (strcmp(type, "list"))
+	if (strcmp(p->ob_type->tp_name, "list"))
 	{
 		printf("  [ERROR] Invalid List Object\n");
 		return;
@@ -74,13 +73,11 @@ void print_python_bytes(PyObject *p)
 {
 	size_t i, size;
 	PyBytesObject *bytes = (PyBytesObject *)p;
-	char *type;
 
 	setbuf(stdout, NULL);
 	printf("[.] bytes object info\n");
 
-	type = p->ob_type->tp_name;
-	if (strcmp(type, "bytes"))
+	if (strcmp(p->ob_type->tp_name, "bytes"))
 	{
 		printf("  [ERROR] Invalid Bytes Object\n");
 		return;
