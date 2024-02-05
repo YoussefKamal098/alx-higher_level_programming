@@ -9,7 +9,7 @@ void print_python_float(PyObject *p)
 	double value;
 	char *str;
 
-	setbuf(stdout, NULL);
+	fflush(stdout);
 	printf("[.] float object info\n");
 
 	if (strcmp(p->ob_type->tp_name, "float"))
@@ -33,7 +33,7 @@ void print_python_bytes(PyObject *p)
 	size_t i, length, size;
 	char *str;
 
-	setbuf(stdout, NULL);
+	fflush(stdout);
 	printf("[.] bytes object info\n");
 
 	if (strcmp(p->ob_type->tp_name, "bytes"))
