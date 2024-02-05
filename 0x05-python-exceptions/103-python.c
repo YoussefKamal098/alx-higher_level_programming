@@ -58,7 +58,7 @@ void print_python_bytes(PyObject *p)
 void print_python_list(PyObject *p)
 {
 	int i;
-	const char *type;
+	char *type;
 
 	setbuf(stdout, NULL);
 	printf("[*] Python list info\n");
