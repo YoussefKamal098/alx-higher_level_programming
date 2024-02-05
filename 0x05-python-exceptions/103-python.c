@@ -33,7 +33,7 @@ void print_python_float(PyObject *p)
  */
 void print_python_bytes(PyObject *p)
 {
-	size_t i, length, size;
+	size_t i, len, size;
 	char *str;
 
 	setbuf(stdout, NULL);
@@ -47,13 +47,13 @@ void print_python_bytes(PyObject *p)
 
 	size = ((PyVarObject *)p)->ob_size;
 	str = ((PyBytesObject *)p)->ob_sval;
-	length = size + 1 > 10 ? 10 : size + 1;
+	len = size + 1 > 10 ? 10 : size + 1;
 
 	printf("  size: %lu\n", size);
 	printf("  trying string: %s\n", str);
-	printf("  first %lu bytes: ", length);
+	printf("  first %lu bytes: ", len);
 
-	for (i = 0; i < length; i++)
+	for (i = 0; i < len; i++)
 	{
 		printf("%02x", bytes->ob_sval[i]);
 
