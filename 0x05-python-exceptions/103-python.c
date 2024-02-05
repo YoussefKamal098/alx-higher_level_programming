@@ -4,13 +4,12 @@
 #include <floatobject.h>
 
 /**
- * print_python_float - prints a basic information about a Python float
- * @p: pointer to a Python object
+ * print_python_float - prints info about python float
+ * @p: address of pyobject struct
  */
-
 void print_python_float(PyObject *p)
 {
-    double d;
+	double d;
 
 	setbuf(stdout, NULL);
 	printf("[.] float object info\n");
@@ -19,14 +18,14 @@ void print_python_float(PyObject *p)
 		printf("  [ERROR] Invalid Float Object\n");
 		return;
 	}
-    d = ((PyFloatObject *)p)->ob_fval;
+	d = ((PyFloatObject *)p)->ob_fval;
 	printf("  value: %s\n",
-        PyOS_double_to_string(d, 'r', 0, Py_DTSF_ADD_DOT_0, NULL));
+	       PyOS_double_to_string(d, 'r', 0, Py_DTSF_ADD_DOT_0, NULL));
 }
 
 /**
- *  print_python_bytes - prints a basic information about a Python bytes
- * @p: pointer to a Python object
+ * print_python_bytes - prints info about python bytes
+ * @p: address of pyobject struct
  */
 void print_python_bytes(PyObject *p)
 {
@@ -42,7 +41,7 @@ void print_python_bytes(PyObject *p)
 	}
 	size = ((PyVarObject *)p)->ob_size;
 	str = ((PyBytesObject *)p)->ob_sval;
-	len =  size + 1 > 10 ? 10 : size + 1;
+	len = size + 1 > 10 ? 10 : size + 1;
 	printf("  size: %lu\n", size);
 	printf("  trying string: %s\n", str);
 	printf("  first %lu bytes: ", len);
@@ -52,13 +51,12 @@ void print_python_bytes(PyObject *p)
 }
 
 /**
- * print_python_list - prints a basic information about a Python list
- * @p: pointer to a Python object
+ * print_python_list - prints info about python lists
+ * @p: address of pyobject struct
  */
 void print_python_list(PyObject *p)
 {
 	int i;
-	char *type;
 
 	setbuf(stdout, NULL);
 	printf("[*] Python list info\n");
@@ -71,13 +69,11 @@ void print_python_list(PyObject *p)
 	printf("[*] Allocated = %lu\n", ((PyListObject *)p)->allocated);
 	for (i = 0; i < ((PyVarObject *)p)->ob_size; i++)
 	{
-	    type = ((PyListObject *)p)->ob_item[i]->ob_type->tp_name
-
-		printf("Element %d: %s\n", i, type);
-		if (!strcmp(type, "bytes"))
+		printf("Element %d: %s\n", i,
+		       ((PyListObject *)p)->ob_item[i]->ob_type->tp_name);
+		if (!strcmp(((PyListObject *)p)->ob_item[i]->ob_type->tp_name, "bytes"))
 			print_python_bytes(((PyListObject *)p)->ob_item[i]);
-		else if (!strcmp(type, "float"))
+		else if (!strcmp(((PyListObject *)p)->ob_item[i]->ob_type->tp_name, "float"))
 			print_python_float(((PyListObject *)p)->ob_item[i]);
-
 	}
 }
