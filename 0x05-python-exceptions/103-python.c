@@ -54,14 +54,9 @@ void print_python_bytes(PyObject *p)
 	printf("  first %lu bytes: ", length);
 
 	for (i = 0; i < length; i++)
-	{
-		printf("%02hhx%s", str[i]);
+		printf("%02x%s", str[i], i + 1 < length ? " " : "");
 
-		if (i + 1 == length)
-			printf("\n");
-		else
-			printf(" ");
-	}
+	printf("\n");
 }
 
 /**
