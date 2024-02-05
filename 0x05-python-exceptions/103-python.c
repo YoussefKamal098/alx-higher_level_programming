@@ -55,6 +55,7 @@ void print_python_bytes(PyObject *p)
 
 	for (i = 0; i < length; i++)
 		printf("%02hhx%s", str[i], i + 1 < length ? " " : "");
+
 	printf("\n");
 }
 
@@ -65,26 +66,28 @@ void print_python_bytes(PyObject *p)
 void print_python_list(PyObject *p)
 {
 	int i;
+	PyListObject *list = (PyListObject *)p;
+	PyVarObject *var = (PyVarObject *)p;
 
 	setbuf(stdout, NULL);
 	printf("[*] Python list info\n");
+
 	if (strcmp(p->ob_type->tp_name, "list"))
 	{
 		printf("  [ERROR] Invalid List Object\n");
 		return;
 	}
 
-	printf("[*] Size of the Python List = %lu\n", ((PyVarObject *)p)->ob_size);
-	printf("[*] Allocated = %lu\n", ((PyListObject *)p)->allocated);
+	printf("[*] Size of the Python List = %lu\n", var->ob_size);
+	printf("[*] Allocated = %lu\n", list->allocated);
 
-	for (i = 0; i < ((PyVarObject *)p)->ob_size; i++)
+	for (i = 0; i < var->ob_size; i++)
 	{
-		printf("Element %d: %s\n", i,
-		       ((PyListObject *)p)->ob_item[i]->ob_type->tp_name);
+		printf("Element %d: %s\n", i, list->ob_item[i]->ob_type->tp_name);
 
-		if (!strcmp(((PyListObject *)p)->ob_item[i]->ob_type->tp_name, "bytes"))
-			print_python_bytes(((PyListObject *)p)->ob_item[i]);
-		else if (!strcmp(((PyListObject *)p)->ob_item[i]->ob_type->tp_name, "float"))
-			print_python_float(((PyListObject *)p)->ob_item[i]);
+		if (strcmp(list->ob_item[i]->ob_type->tp_name, "bytes") == 0)
+			print_python_bytes(list->ob_item[i]);
+		else if (strcmp(list->ob_item[i]->ob_type->tp_name, "float") == 0)
+			print_python_float(list->ob_item[i]);
 	}
 }
