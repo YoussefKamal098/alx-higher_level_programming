@@ -3,10 +3,6 @@
 #include <Python.h>
 #include <floatobject.h>
 
-void print_python_float(PyObject *p);
-void print_python_list(PyObject *p);
-void print_python_bytes(PyObject *p);
-
 /**
  * print_python_float - prints a basic information about a Python float
  * @p: pointer to a Python object
@@ -86,7 +82,7 @@ void print_python_bytes(PyObject *p)
 	printf("[.] bytes object info\n");
 
 	type = p->ob_type->tp_name;
-	if (strcmp(type, "bytes") != 0)
+	if (strcmp(type, "bytes"))
 	{
 		printf("  [ERROR] Invalid Bytes Object\n");
 		return;
