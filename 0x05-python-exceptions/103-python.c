@@ -68,7 +68,7 @@ void print_python_list(PyObject *p)
 	size_t i, size;
 	PyListObject *list = (PyListObject *)p;
 	PyVarObject *var = (PyVarObject *)p;
-	char *type;
+	const char *type;
 
 	setbuf(stdout, NULL);
 	printf("[*] Python list info\n");
