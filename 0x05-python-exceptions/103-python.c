@@ -1,5 +1,4 @@
 #include <Python.h>
-#include <floatobject.h>
 
 /**
  * print_python_float - prints a basic information about a Python float
