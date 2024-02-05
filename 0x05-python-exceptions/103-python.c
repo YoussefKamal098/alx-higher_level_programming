@@ -68,6 +68,7 @@ void print_python_list(PyObject *p)
 	size_t i, size;
 	PyListObject *list = (PyListObject *)p;
 	PyVarObject *var = (PyVarObject *)p;
+	char *type;
 
 	setbuf(stdout, NULL);
 	printf("[*] Python list info\n");
@@ -85,7 +86,9 @@ void print_python_list(PyObject *p)
 
 	for (i = 0; i < size; i++)
 	{
-		printf("Element %lu: %s\n", i, list->ob_item[i]->ob_type->tp_name);
+		type = ist->ob_item[i]->ob_type->tp_name;
+
+		printf("Element %lu: %s\n", i, type);
 
 		if (strcmp(list->ob_item[i]->ob_type->tp_name, "bytes") == 0)
 			print_python_bytes(list->ob_item[i]);
