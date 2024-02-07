@@ -16,7 +16,7 @@ class Square:
         """
         Initializes a new instance of the Square class.
 
-        Parameters:
+        args:
             size (int): The size of the square.
 
         Example:
