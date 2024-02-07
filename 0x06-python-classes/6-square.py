@@ -34,22 +34,11 @@ class Square:
 
     @property
     def size(self):
-        """
-        Gets the size of the square.
-
-        Returns:
-            int: The size of the square.
-        """
+        """Get/set the current size of the square."""
         return self.__size
 
     @size.setter
     def size(self, value):
-        """
-        Sets the size of the square.
-
-        Parameters:
-            value (int): The new size of the square.
-        """
         if type(value) != int:
             raise TypeError('size must be an integer')
         if value < 0:
@@ -59,23 +48,11 @@ class Square:
 
     @property
     def position(self):
-        """
-        Gets the current position of the square.
-
-        Returns:
-            tuple: The position of the square.
-        """
+        """Get/set the current position of the square."""
         return self.__position
 
     @position.setter
     def position(self, value):
-        """
-        Sets the position of the square.
-
-        Parameters:
-            value (tuple): The new position of the square.
-        """
-
         if (type(value) != tuple or len(value) != 2 or
                 not all(type(num) == int for num in value) or
                 not all(num >= 0 for num in value)):
