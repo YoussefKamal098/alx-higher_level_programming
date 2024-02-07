@@ -3,12 +3,7 @@
 
 
 class Node:
-    """Node class for a singly linked list.
-
-    Attributes:
-        data (int): The data stored in the node.
-        next_node (Node): Reference to the next node in the linked list.
-    """
+    """Node class for a singly linked list."""
 
     def __init__(self, data, next_node=None):
         """Initialize a Node object.
@@ -47,11 +42,7 @@ class Node:
 
 
 class SinglyLinkedList:
-    """SinglyLinkedList class representing a sorted singly linked list.
-
-    Attributes:
-        __head (Node): The head node of the linked list.
-    """
+    """SinglyLinkedList class representing a sorted singly linked list."""
 
     def __init__(self):
         """Initialize an empty SinglyLinkedList."""
@@ -86,11 +77,7 @@ class SinglyLinkedList:
             curr = curr.next_node
 
     def __str__(self):
-        """Generate a string representation of the linked list.
-
-        Returns:
-            str: A string representation of the linked list.
-        """
+        """Generate a string representation of the linked list."""
 
         curr = self.__head
         string = ""
