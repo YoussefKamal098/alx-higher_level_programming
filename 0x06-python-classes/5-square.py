@@ -48,7 +48,7 @@ class Square:
         Parameters:
             value (int): The new size of the square.
         """
-        if not type(value) != int:
+        if type(value) != int:
             raise TypeError('size must be an integer')
         if value < 0:
             raise ValueError('size must be >= 0')
