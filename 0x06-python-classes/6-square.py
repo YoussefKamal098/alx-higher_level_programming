@@ -17,7 +17,6 @@ class Square:
         Args:
             size (int): The size of the square.
         """
-
         self.size = size
         self.position = position
 
@@ -59,7 +58,7 @@ class Square:
     @property
     def position(self):
         """
-        set the current position of the square.
+        Gets the current position of the square.
 
         Returns:
             tuple: The position of the square.
