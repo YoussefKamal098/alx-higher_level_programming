@@ -49,7 +49,7 @@ class Square:
         Parameters:
             value (int): The new size of the square.
         """
-        if not type(value) != int:
+        if type(value) != int:
             raise TypeError('size must be an integer')
         if value < 0:
             raise ValueError('size must be >= 0')
@@ -76,7 +76,7 @@ class Square:
         """
 
         if (type(value) != tuple or len(value) != 2 or
-                not all(type(num) != int for num in value) or
+                not all(type(num) == int for num in value) or
                 not all(num >= 0 for num in value)):
             raise TypeError("position must be a tuple of 2 positive integers")
 
