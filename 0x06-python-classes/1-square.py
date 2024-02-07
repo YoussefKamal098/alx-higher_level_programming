@@ -6,10 +6,6 @@ class Square:
 
     Attributes:
         __size (int): The size of the square.
-
-    Example:
-        To create a square with a size of 5:
-        >>> square = Square(5)
     """
 
     def __init__(self, size):
@@ -18,9 +14,5 @@ class Square:
 
         Args:
             size (int): The size of the square.
-
-        Example:
-            To create a square with a size of 5:
-            >>> square = Square(5)
         """
         self.__size = size
