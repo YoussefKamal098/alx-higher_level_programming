@@ -61,7 +61,7 @@ class Square:
         self.__position = value
 
     def my_print(self):
-        """ Prints a representation of the square using the '#' with position """
+        """ Prints a representation of the square using the '#' """
         if self.__size == 0:
             print()
             return
