@@ -14,7 +14,7 @@ class Rectangle:
     number_of_instances = 0
     """int: The number of active instances."""
 
-    print_symbol = '#'
+    print_symbol = "#"
     """type: Print symbol, can be any type."""
 
     def __init__(self, width=0, height=0):
@@ -133,7 +133,9 @@ class Rectangle:
         if self.width == 0 or self.height == 0:
             return ""
 
-        return "\n".join([str(self.print_symbol) * self.width for _ in range(self.height)])
+        return "\n".join(
+            [str(self.print_symbol) * self.width for _ in range(self.height)]
+        )
 
     def __repr__(self):
         """
