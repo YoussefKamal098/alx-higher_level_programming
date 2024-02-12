@@ -121,8 +121,8 @@ class Rectangle:
         Note:
             If either the width or height is 0, an empty string is returned.
         """
-        
+
         if self.width == 0 or self.height == 0:
             return ""
 
-        return (("#" + "\n") * self.width) * self.height
+        return ("#" * self.width + "\n") * self.height
