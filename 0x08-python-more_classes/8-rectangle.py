@@ -122,14 +122,16 @@ class Rectangle:
     @staticmethod
     def bigger_or_equal(rect_1, rect_2):
         """
-        Compare the areas of two Rectangle instances and return the larger or equal one.
+        Compare the areas of two Rectangle instances and
+        return the larger or equal one.
 
         Args:
             rect_1 (Rectangle): The first Rectangle instance.
             rect_2 (Rectangle): The second Rectangle instance.
 
         Raises:
-            TypeError: If either rect_1 or rect_2 is not an instance of Rectangle.
+            TypeError: If either rect_1 or rect_2 is not an
+            instance of Rectangle.
 
         Returns:
             Rectangle: The Rectangle instance with the greater or equal area.
