@@ -1,7 +1,9 @@
 #!/usr/bin/python3
+import sys
+
 
 class Solution:
-    def solveNQueens(self, n: int) -> list[list[str]]:
+    def solveNQueens(self, n):
         board = []
         cols = set()
         pos_diagonal = set()
@@ -35,8 +37,6 @@ class Solution:
 
 
 if __name__ == "__main__":
-    import sys
-
     if len(sys.argv) != 2:
         print("Usage: nqueens N")
         sys.exit(1)
