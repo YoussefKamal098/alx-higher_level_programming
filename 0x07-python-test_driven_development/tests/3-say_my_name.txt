@@ -1,0 +1,72 @@
+The ``3-say_my_name`` module
+============================
+
+Using ``3-say_my_name``
+---------------------
+
+Import module:
+    >>> say_my_name = __import__('3-say_my_name').say_my_name
+
+Test Case 1: Basic:
+	>>> say_my_name("hello", "world!")
+	My name is hello world!
+
+Test Case 2: Firstname:
+	>>> say_my_name("hello")
+	My name is hello 
+
+Test Case 3: Lastname empty:
+	>>> say_my_name("hello", "")
+	My name is hello 
+
+Test Case 4: Both names empty:
+	>>> say_my_name("", "")
+	My name is  
+
+Test Case 5: Just spaces:
+	>>> say_my_name("   ", "   ")
+	My name is        
+
+Test Case 6: Empty firstname:
+	>>> say_my_name("", "hello")
+	My name is  hello
+
+Test Case 7: Not str arg1:
+    >>> say_my_name(44, "hello")
+    Traceback (most recent call last):
+    ...
+    TypeError: first_name must be a string
+
+Test Case 8: Not str arg2:
+    >>> say_my_name("hello", 100)
+    Traceback (most recent call last):
+    ...
+    TypeError: last_name must be a string
+
+Test Case 9: Not str arg1 arg2:
+    >>> say_my_name(100, 99)
+    Traceback (most recent call last):
+    ...
+    TypeError: first_name must be a string
+
+Test Case 10: Missing 2 args:
+    >>> say_my_name()
+    Traceback (most recent call last):
+    ...
+    TypeError: say_my_name() missing 1 required positional argument: 'first_name'
+
+Test Case 11: Valid first and last names
+    >>> say_my_name("Joseph", "James")
+    My name is Joseph James
+
+Test Case 12: Invalid input - first_name is not a string
+    >>> say_my_name(123, "julia")
+    Traceback (most recent call last):
+        ...
+    TypeError: first_name must be a string
+
+Test Case 13: Invalid input - last_name is not a string
+    >>> say_my_name("Jacob", 123)
+    Traceback (most recent call last):
+        ...
+    TypeError: last_name must be a string
