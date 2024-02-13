@@ -1,0 +1,135 @@
+The ``5-text_indentation`` module
+============================
+
+Using ``text_indentation``
+---------------------
+
+Import module:
+    >>> text_indentation = __import__('5-text_indentation').text_indentation
+
+Test Case 1: No delim:
+    >>> text_indentation("Hello World")
+    Hello World
+
+Test Case 2: String with spaces:
+    >>> text_indentation("Hello          ")
+    Hello
+
+Test Case 3: String with spaces 2:
+    >>> text_indentation("        World")
+    World
+    
+Test Case 5: String with spaces 3:
+    >>> text_indentation("        Hello          ")
+    Hello
+    
+Test Case 6: String with empty string:
+    >>> text_indentation("")
+
+Test Case 7: String with empty string 2:
+    >>> text_indentation("      ")
+
+Test Case 8: Simple:
+    >>> text_indentation("Hello: Holberton")
+    Hello:
+    <BLANKLINE>
+    Holberton
+
+Test Case 9: Existing newlines:
+    >>> text_indentation("?\n\n.\n\n:")
+    ?
+    <BLANKLINE>
+    <BLANKLINE>
+    <BLANKLINE>
+    .
+    <BLANKLINE>
+    <BLANKLINE>
+    <BLANKLINE>
+    :
+    <BLANKLINE>
+
+Test Case 10: Newline:
+    >>> text_indentation("\n")
+    <BLANKLINE>
+
+Test Case 11: Newline 2:
+    >>> text_indentation("\n\n")
+    <BLANKLINE>
+    <BLANKLINE>
+
+Test Case 12: Newline 3:
+    >>> text_indentation("Hello\n\n")
+    Hello
+    <BLANKLINE>
+
+Test Case 13: delims with spaces:
+    >>> text_indentation("      ?:  :  ")
+    ?
+    <BLANKLINE>
+    :
+    <BLANKLINE>
+    :
+    <BLANKLINE>
+
+Test Case 14: All delimeters:
+    >>> text_indentation("Hello: World? school. foo")
+    Hello:
+    <BLANKLINE>
+    World?
+    <BLANKLINE>
+    school.
+    <BLANKLINE>
+    foo
+
+Test Case 15: All delimeters with spaces:
+    >>> text_indentation("Hello   :     World    ?    school.    foo")
+    Hello:
+    <BLANKLINE>
+    World?
+    <BLANKLINE>
+    school.
+    <BLANKLINE>
+    foo
+
+Test Case 16: Just delimeters:
+    >>> text_indentation(".?:")
+    .
+    <BLANKLINE>
+    ?
+    <BLANKLINE>
+    :
+    <BLANKLINE>
+
+Test Case 17: Just delimeters 2:
+    >>> text_indentation("     ?   ")
+    ?
+    <BLANKLINE>
+
+Test Case 18: Non indent inside indent
+    >>> text_indentation("?Hello.")
+    ?
+    <BLANKLINE>
+    Hello.
+    <BLANKLINE>
+
+Test Case 19: All delimeters with spaces at end:
+    >>> text_indentation("Hello   :     World    ?    school.    foo     ")
+    Hello:
+    <BLANKLINE>
+    World?
+    <BLANKLINE>
+    school.
+    <BLANKLINE>
+    foo
+
+Test Case 20: Case 1: none:
+    >>> text_indentation(None)
+    Traceback (most recent call last):
+    ...
+    TypeError: text must be a string
+
+Test Case 21: Number:
+    >>> text_indentation(33)
+    Traceback (most recent call last):
+    ...
+    TypeError: text must be a string
