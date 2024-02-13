@@ -1,0 +1,94 @@
+The ``0-add_integer`` module
+============================
+
+Using ``add_integer``
+---------------------
+
+Import function from module:
+    >>> add_integer = __import__('0-add_integer').add_integer
+
+Test Case 1: One int argument:
+    >>> add_integer(3)
+    101
+
+Test Case 2: Two big integers:
+    >>> add_integer(999999998, 999999999)
+    1999999997
+
+Test Case 3: Positive, negative integers:
+    >>> add_integer(34263478, -89234582395)
+    -89200318917
+
+Test Case 4: Negative, positive integers:
+    >>> add_integer(-13947692, 57234)
+    -13890458
+
+Test Case 5: An integer and a float:
+    >>> add_integer(124, 7.987)
+    131
+
+Test Case 6: One int argument and check default second:
+    >>> add_integer(0)
+    98
+
+Test Case 7: One float:
+    >>> add_integer(125.9)
+    223
+
+Test Case 7: One negative float:
+    >>> add_integer(-96.5)
+    2
+
+Test Case 8: Two integers:
+    >>> add_integer(10, 6)
+    16
+
+Test Case 9: Float and an integer:
+    >>> add_integer(234234.43545, 4352345)
+    4586579
+
+Test Case 10: Two floats:
+    >>> add_integer(0.95, 0.95)
+    0
+
+Test Case 11: Both args invalid:
+    >>> add_integer(None, None)
+    Traceback (most recent call last):
+        ...
+    TypeError: a must be an integer
+
+Test Case 12: Two strings:
+    >>> add_integer("foo", "bar")
+    Traceback (most recent call last):
+        ...
+    TypeError: a must be an integer
+
+Test Case 13: Float overflow:
+    >>> add_integer(float('inf'), 0)
+    Traceback (most recent call last):
+    ...
+    OverflowError: cannot convert float infinity to integer
+
+Test Case 14: Add infinity:
+    >>> add_integer(float('-inf'), float('inf'))
+    Traceback (most recent call last):
+    ...
+    OverflowError: cannot convert float infinity to integer
+
+Test Case 15: Add nan:
+    >>> add_integer(0, float('nan'))
+    Traceback (most recent call last):
+    ...
+    ValueError: cannot convert float NaN to integer
+
+Test Case 16: First arg invalid:
+    >>> add_integer("foo", 0)
+    Traceback (most recent call last):
+        ...
+    TypeError: a must be an integer
+
+Test Case 17: Second arg invalid:
+    >>> add_integer(153125, [])
+    Traceback (most recent call last):
+        ...
+    TypeError: b must be an integer
