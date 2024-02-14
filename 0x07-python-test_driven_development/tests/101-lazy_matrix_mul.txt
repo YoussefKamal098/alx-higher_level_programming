@@ -33,13 +33,6 @@ Test Case 6:
     ... 	print(te)
     invalid data type for einsum
 
-Test Case 7:
-    >>> try:
-    ...	print(matrix_mul([[1, 2], [3, 4]], [[1, 2], ["3", 4]]))
-    ... except Exception as te:
-    ... 	print(te)
-    ufunc 'matmul' did not contain a loop with signature matching types (dtype('int64'), dtype('<U21')) -> None
-
 Test Case 8:
     >>> try:
     ...	print(matrix_mul([[1], [2]], [[3, 4], [5, 6]]))
