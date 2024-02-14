@@ -38,8 +38,7 @@ Test Case 7:
     ...	print(matrix_mul([[1, 2], [3, 4]], [[1, 2], ["3", 4]]))
     ... except Exception as te:
     ... 	print(te)
-    invalid data type for einsum
-
+    ufunc 'matmul' did not contain a loop with signature matching types (dtype('int64'), dtype('<U21')) -> None
 
 Test Case 8:
     >>> try:
