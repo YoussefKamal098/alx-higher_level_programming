@@ -41,6 +41,14 @@ Test Case 7:
     invalid data type for einsum
 
 
+Test Case 8:
+    >>> try:
+    ...	print(matrix_mul([[1], [2]], [[3, 4], [5, 6]]))
+    ... except Exception as te:
+    ... 	print(te)
+    shapes (2,1) and (2,2) not aligned: 1 (dim 1) != 2 (dim 0)
+
+
 Test Case 9:
     >>> try:
     ...	print(matrix_mul([[1], [3, 2]], [[3, 4], [5, 6]]))
