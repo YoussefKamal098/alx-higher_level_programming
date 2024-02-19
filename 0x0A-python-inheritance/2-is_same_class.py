@@ -12,13 +12,5 @@ def is_same_class(obj, a_class):
 
     Returns:
         bool: True if the object belongs to the specified class, False otherwise.
-
-    Example:
-        >>> is_same_class(42, int)
-        True
-        >>> is_same_class("Hello", int)
-        False
-        >>> is_same_class([1, 2, 3], list)
-        True
     """
     return type(obj) == a_class
