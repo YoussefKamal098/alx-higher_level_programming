@@ -26,7 +26,7 @@ Test Case 2: Area method called via class with no args:
 Test Case 3: Area method args test (1 arg):
     >>> bg.area(10)
     Traceback (most recent call last):
-    TypeError: BaseGeometry.area() takes 1 positional argument but 2 were given
+    TypeError: area() takes 1 positional argument but 2 were given
 
 Test Case 4: Area method normal test:
     >>> bg.area()
@@ -108,11 +108,11 @@ Test Case 20: Integer_validator method empty string:
     >>> bg.integer_validator(None, 2)
 
 Test Case 21: Integer_validator method tuple:
-    >>> bg.integer_validator("Foo", (2, 4))
+    >>> bg.integer_validator("foo", (2, 4))
     Traceback (most recent call last):
-    TypeError: Foo must be an integer
+    TypeError: foo must be an integer
 
 Test Case 22: Integer_validator method dic:
-    >>> bg.integer_validator("Foo", {2, 4})
+    >>> bg.integer_validator("foo", {2, 4})
     Traceback (most recent call last):
-    TypeError: Foo must be an integer
+    TypeError: foo must be an integer
