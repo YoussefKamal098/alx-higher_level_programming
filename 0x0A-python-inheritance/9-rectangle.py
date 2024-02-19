@@ -16,7 +16,8 @@ class Rectangle(BaseGeometry):
     - __init__(width, height): Initializes a Rectangle instance
     with specified width and height.
     - area(): Calculates and returns the area of the rectangle.
-    - __str__(): Provides a human-readable string representation of the rectangle.
+    - __str__(): Provides a human-readable string representation
+    of the rectangle.
     """
 
     def __init__(self, width, height):
