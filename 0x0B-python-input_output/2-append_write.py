@@ -22,5 +22,5 @@ def append_write(filename="", text=""):
     - filename (str): The name of the file to be appended. Default is an empty string.
     - text (str): The text to be appended to the file. Default is an empty string.
     """
-    with open(filename, "b") as file:
+    with open(filename, "a") as file:
         return file.write(text)
