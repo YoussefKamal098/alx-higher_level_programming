@@ -26,7 +26,7 @@ def print_info(total_size, status_codes):
 
     for code, value in sorted(status_codes.items()):
         if value > 0:
-            print("{:s}: {:d}".format(code, value))
+            print(f"{code:s}: {value:d}")
 
 
 def parse_line(line):
