@@ -93,5 +93,4 @@ def process_log_data():
     return total_size, status_codes
 
 
-if __name__ == "__main__":
-    total_size, status_codes = process_log_data()
+total_size, status_codes = process_log_data()
