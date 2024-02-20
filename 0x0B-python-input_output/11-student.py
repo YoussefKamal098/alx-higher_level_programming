@@ -45,8 +45,8 @@ class Student:
         Updates the student's attributes with values from a JSON dictionary.
 
         Args:
-            json (dict): A dictionary containing student
-            attribute key-value pairs.
+            json (dict): A dictionary containing student attribute
+            key-value pairs.
 
         Raises:
             ValueError: If the JSON dictionary contains invalid keys or values.
