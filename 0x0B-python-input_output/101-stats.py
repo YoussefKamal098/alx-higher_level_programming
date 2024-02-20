@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-
 """
 This module processes log data read from standard input,
 tracking the total file size and counts of encountered HTTP status codes.
@@ -38,8 +37,8 @@ def parse_line(line):
         line (str): The log line to parse.
 
     Returns:
-        tuple[int, int]: A tuple containing the extracted status code and file size,
-           or None if the line cannot be parsed.
+        tuple[int, int]: A tuple containing the extracted status code
+        and file size, or None if the line cannot be parsed.
     """
     tokens = line.split()
 
@@ -48,7 +47,7 @@ def parse_line(line):
             status_code, file_size = int(tokens[-2]), int(tokens[-1])
             return status_code, file_size
         except ValueError:
-            raise ValueError("Line has invalid tokens")
+            return None, None
     else:
         return None, None
 
@@ -92,8 +91,6 @@ def process_log_data():
                 print_info(total_size, status_codes)
 
     except KeyboardInterrupt:
-        print_info(total_size, status_codes)
-    finally:
         print_info(total_size, status_codes)
 
     return total_size, status_codes
