@@ -15,7 +15,8 @@ def class_to_json(obj):
         obj: An instance of a class with public attributes to serialize.
 
     Returns:
-        A dictionary representing the JSON-serialized form of the class instance,
+        A dictionary representing the JSON-serialized form of the
+        class instance,
         including public attributes and their values.
 
     Raises:
