@@ -26,7 +26,7 @@ def print_info(total_size, status_codes):
 
     for code, value in sorted(status_codes.items()):
         if value > 0:
-            print('{:d}: {:d}'.format(code, value))
+            print('{:s}: {:d}'.format(code, value))
 
 
 def parse_line(line):
@@ -43,11 +43,13 @@ def parse_line(line):
     tokens = line.split()
 
     if len(tokens) >= 2:
+        status_code = tokens[-2]
+        
         try:
-            status_code, file_size = int(tokens[-2]), int(tokens[-1])
+            file_size = int(tokens[-1])
             return status_code, file_size
         except ValueError:
-            return None, None
+            return status_code, None
     else:
         return None, None
 
@@ -62,14 +64,14 @@ def process_log_data():
     """
 
     status_codes = {
-        200: 0,
-        301: 0,
-        400: 0,
-        401: 0,
-        403: 0,
-        404: 0,
-        405: 0,
-        500: 0,
+        "200": 0,
+        "301": 0,
+        "400": 0,
+        "401": 0,
+        "403": 0,
+        "404": 0,
+        "405": 0,
+        "500": 0,
     }
 
     total_size = 0
