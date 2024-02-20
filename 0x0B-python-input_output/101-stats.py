@@ -43,7 +43,7 @@ def parse_line(line):
     tokens = line.split()
 
     if len(tokens) >= 2:
-        status_code, file_size = tokens[-2], tokens[-1]
+        status_code, file_size = tokens[-2], int(tokens[-1])
         return status_code, file_size
     else:
         return None, None
