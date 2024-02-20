@@ -26,7 +26,7 @@ def print_info(total_size, status_codes):
 
     for code, value in sorted(status_codes.items()):
         if value > 0:
-            print('{:s}: {:d}'.format(code, value))
+            print("{:s}: {:d}".format(code, value))
 
 
 def parse_line(line):
@@ -43,13 +43,8 @@ def parse_line(line):
     tokens = line.split()
 
     if len(tokens) >= 2:
-        status_code = tokens[-2]
-        
-        try:
-            file_size = int(tokens[-1])
-            return status_code, file_size
-        except ValueError:
-            return status_code, None
+        status_code, file_size = tokens[-2], tokens[-1]
+        return status_code, file_size
     else:
         return None, None
 
