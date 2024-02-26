@@ -6,8 +6,8 @@ common functionalities. It includes features for serializing
 objects to JSON and CSV files, loading objects from these files,
 and performing basic data validation. The module defines a Base class
 with utility methods for working with objects in a consistent manner,
-making it easier to handle data persistence and manipulation across
-different classes.
+making it easier to handle data persistence and manipulation
+across different classes.
 """
 import csv
 import json
