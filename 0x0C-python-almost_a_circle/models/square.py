@@ -7,7 +7,6 @@ for square objects in Python applications. This class inherits from
 the 'Rectangle' class and focuses on providing methods for updating,
 converting to dictionaries, and obtaining parameters specific to squares.
 """
-from types import MappingProxyType
 
 from models.rectangle import Rectangle
 
@@ -23,9 +22,7 @@ class Square(Rectangle):
     - size (int): Size of the square.
     """
     __slots__ = ("__size",)
-    __params = MappingProxyType(
-        {"size": 1}
-    )
+    __params = {"size": 1}
 
     def __init__(self, size, x=0, y=0, id=None):
         """
@@ -126,7 +123,7 @@ class Square(Rectangle):
         params = {key: value for key, value in params.items()
                   if key not in removed_params}
 
-        return MappingProxyType(params)
+        return params
 
     def __str__(self):
         """
