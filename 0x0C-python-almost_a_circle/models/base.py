@@ -22,7 +22,6 @@ class Base:
     Attributes:
     - id (int): An identifier for the object.
     """
-    __slots__ = ("id",)
     __params = {"id": 0}
 
     __nb_objects = 0
