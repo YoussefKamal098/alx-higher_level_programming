@@ -22,7 +22,6 @@ class Base:
     Attributes:
     - id (int): An identifier for the object.
     """
-    __params = {"id": 0}
 
     __nb_objects = 0
 
@@ -352,7 +351,7 @@ class Base:
         Returns:
         - tuple: Tuple of parameter names.
         """
-        return tuple(cls.__params.keys())
+        return tuple("id", )
 
     @classmethod
     def get_params_with_default_values(cls):
@@ -362,7 +361,7 @@ class Base:
         Returns:
         - dict: Mapping of parameters to their default values.
         """
-        return cls.__params
+        return {"id": 0}
 
     @staticmethod
     def draw(list_rectangles, list_squares):
