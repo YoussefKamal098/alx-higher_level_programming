@@ -1,4 +1,4 @@
-#!user/bin/python3
+#!/usr/bin/python3
 """
 The 'square' module, part of the 'models' package,
 extends the functionalities provided by the 'Rectangle' module.

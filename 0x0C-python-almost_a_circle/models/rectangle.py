@@ -1,4 +1,4 @@
-#!user/bin/python3
+#!/usr/bin/python3
 """
 The 'rectangle' module, part of the 'models' package,
 extends the functionalities provided by the 'Base' module.
@@ -8,6 +8,8 @@ This module focuses on geometric entities and provides methods for
 calculating area, displaying, updating attributes, and converting
 to dictionaries.
 """
+from types import MappingProxyType
+
 from models.base import Base
 
 
@@ -18,7 +20,9 @@ class Rectangle(Base):
     conversion to dictionaries.
     """
     __slots__ = ("__width", "__height", "__x", "__y")
-    __params = {"width": 1, "height": 1, "x": 0, "y": 0}
+    __params = MappingProxyType(
+        {"width": 1, "height": 1, "x": 0, "y": 0}
+    )
 
     def __init__(self, width, height, x=0, y=0, id=None):
         """
@@ -207,7 +211,7 @@ class Rectangle(Base):
         """
         params = dict(cls.__params)
         params.update(super().get_params_with_default_values())
-        return params
+        return MappingProxyType(params)
 
     def __str__(self):
         """

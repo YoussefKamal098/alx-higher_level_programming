@@ -1,4 +1,4 @@
-#!user/bin/python3
+#!/usr/bin/python3
 """
 The 'base' module, part of the 'models' package,
 The Base module provides a foundation for managing objects with
@@ -13,6 +13,7 @@ import csv
 import json
 import os
 import turtle
+from types import MappingProxyType
 
 
 class Base:
@@ -22,6 +23,8 @@ class Base:
     Attributes:
     - id (int): An identifier for the object.
     """
+    __slots__ = ("id",)
+    __params = MappingProxyType({"id": 0})
 
     __nb_objects = 0
 
@@ -351,7 +354,7 @@ class Base:
         Returns:
         - tuple: Tuple of parameter names.
         """
-        return tuple("id", )
+        return tuple(cls.__params.keys())
 
     @classmethod
     def get_params_with_default_values(cls):
@@ -361,7 +364,7 @@ class Base:
         Returns:
         - dict: Mapping of parameters to their default values.
         """
-        return {"id": 0}
+        return cls.__params
 
     @staticmethod
     def draw(list_rectangles, list_squares):
