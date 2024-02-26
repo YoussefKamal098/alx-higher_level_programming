@@ -13,7 +13,6 @@ import csv
 import json
 import os
 import turtle
-from types import MappingProxyType
 
 
 class Base:
@@ -24,7 +23,7 @@ class Base:
     - id (int): An identifier for the object.
     """
     __slots__ = ("id",)
-    __params = MappingProxyType({"id": 0})
+    __params = {"id": 0}
 
     __nb_objects = 0
 
