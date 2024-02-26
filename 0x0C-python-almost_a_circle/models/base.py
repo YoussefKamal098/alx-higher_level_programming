@@ -23,7 +23,7 @@ class Base:
     - id (int): An identifier for the object.
     """
     __slots__ = ("id",)
-    __params = {"id": 0}
+    __params = {"id": None}
 
     __nb_objects = 0
 
