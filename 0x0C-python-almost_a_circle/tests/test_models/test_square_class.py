@@ -227,41 +227,42 @@ class TestSquareStdout(unittest.TestCase):
 
     @staticmethod
     def capture_stdout(sq, method):
-        capture = io.StringIO()
-        sys.stdout = capture
-        if method == "print":
-            print(sq)
-        else:
-            sq.display()
-        sys.stdout = sys.__stdout__
-        return capture
+        with io.StringIO() as capture:
+            sys.stdout = capture
+            if method == "print":
+                print(sq)
+            else:
+                sq.display()
+            sys.stdout = sys.__stdout__
+            return capture.getvalue()
 
     def test_str_method_print_size(self):
         square = Square(4)
-        capture = TestSquareStdout.capture_stdout(square, "print")
-        correct = "[Square] ({}) 0/0 - 4\n".format(square.id)
-        self.assertEqual(correct, capture.getvalue())
+        expected_output = "[Square] ({}) 0/0 - 4\n".format(square.id)
+        self.assertEqual(expected_output, self.capture_stdout(square, "print"))
 
     def test_str_method_size_x(self):
         square = Square(5, 5)
-        correct = "[Square] ({}) 5/0 - 5".format(square.id)
-        self.assertEqual(correct, square.__str__())
+        expected_output = "[Square] ({}) 5/0 - 5".format(square.id)
+        self.assertEqual(expected_output, square.__str__())
 
     def test_str_method_size_x_y(self):
         square = Square(7, 4, 22)
-        correct = "[Square] ({}) 4/22 - 7".format(square.id)
-        self.assertEqual(correct, str(square))
+        expected_output = "[Square] ({}) 4/22 - 7".format(square.id)
+        self.assertEqual(expected_output, str(square))
 
     def test_str_method_size_x_y_id(self):
         square = Square(2, 88, 4, 19)
-        self.assertEqual("[Square] (19) 88/4 - 2", str(square))
+        expected_output = "[Square] (19) 88/4 - 2"
+        self.assertEqual(expected_output, str(square))
 
     def test_str_method_changed_attributes(self):
         square = Square(7, 0, 0, [4])
         square.size = 15
         square.x = 8
         square.y = 10
-        self.assertEqual("[Square] ([4]) 8/10 - 15", str(square))
+        expected_output = "[Square] ([4]) 8/10 - 15"
+        self.assertEqual(expected_output, str(square))
 
     def test_str_method_one_arg(self):
         square = Square(1, 2, 3, 4)
@@ -271,25 +272,23 @@ class TestSquareStdout(unittest.TestCase):
     # Test display method
     def test_display_size(self):
         square = Square(2, 0, 0, 9)
-        capture = TestSquareStdout.capture_stdout(square, "display")
-        self.assertEqual("##\n##\n", capture.getvalue())
+        expected_output = "##\n##\n"
+        self.assertEqual(expected_output, self.capture_stdout(square, "display"))
 
     def test_display_size_x(self):
         square = Square(3, 1, 0, 18)
-        capture = TestSquareStdout.capture_stdout(square, "display")
-        self.assertEqual(" ###\n ###\n ###\n", capture.getvalue())
+        expected_output = " ###\n ###\n ###\n"
+        self.assertEqual(expected_output, self.capture_stdout(square, "display"))
 
     def test_display_size_y(self):
         square = Square(4, 0, 1, 9)
-        capture = TestSquareStdout.capture_stdout(square, "display")
-        display = "\n####\n####\n####\n####\n"
-        self.assertEqual(display, capture.getvalue())
+        expected_output = "\n####\n####\n####\n####\n"
+        self.assertEqual(expected_output, self.capture_stdout(square, "display"))
 
     def test_display_size_x_y(self):
         square = Square(2, 3, 2, 1)
-        capture = TestSquareStdout.capture_stdout(square, "display")
-        display = "\n\n   ##\n   ##\n"
-        self.assertEqual(display, capture.getvalue())
+        expected_output = "\n\n   ##\n   ##\n"
+        self.assertEqual(expected_output, self.capture_stdout(square, "display"))
 
     def test_display_one_arg(self):
         square = Square(3, 4, 5, 2)
