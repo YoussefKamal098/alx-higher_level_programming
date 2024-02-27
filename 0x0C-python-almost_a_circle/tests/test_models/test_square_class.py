@@ -273,22 +273,26 @@ class TestSquareStdout(unittest.TestCase):
     def test_display_size(self):
         square = Square(2, 0, 0, 9)
         expected_output = "##\n##\n"
-        self.assertEqual(expected_output, self.capture_stdout(square, "display"))
+        self.assertEqual(expected_output,
+                         self.capture_stdout(square, "display"))
 
     def test_display_size_x(self):
         square = Square(3, 1, 0, 18)
         expected_output = " ###\n ###\n ###\n"
-        self.assertEqual(expected_output, self.capture_stdout(square, "display"))
+        self.assertEqual(expected_output,
+                         self.capture_stdout(square, "display"))
 
     def test_display_size_y(self):
         square = Square(4, 0, 1, 9)
         expected_output = "\n####\n####\n####\n####\n"
-        self.assertEqual(expected_output, self.capture_stdout(square, "display"))
+        self.assertEqual(expected_output,
+                         self.capture_stdout(square, "display"))
 
     def test_display_size_x_y(self):
         square = Square(2, 3, 2, 1)
         expected_output = "\n\n   ##\n   ##\n"
-        self.assertEqual(expected_output, self.capture_stdout(square, "display"))
+        self.assertEqual(expected_output,
+                         self.capture_stdout(square, "display"))
 
     def test_display_one_arg(self):
         square = Square(3, 4, 5, 2)

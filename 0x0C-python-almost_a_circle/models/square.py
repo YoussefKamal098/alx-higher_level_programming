@@ -22,7 +22,7 @@ class Square(Rectangle):
     - size (int): Size of the square.
     """
     __slots__ = ("__size",)
-    __params = {"size": 1}
+    __args_with_default_values = {"id": None, "size": 1, "x": 0, "y": 0}
 
     def __init__(self, size, x=0, y=0, id=None):
         """
@@ -87,28 +87,22 @@ class Square(Rectangle):
             dict: Dictionary containing square attributes.
         """
         return {
-            params: getattr(self, params) for params in Square.get_params()
+            arg: getattr(self, arg) for arg in Square.get_args()
         }
 
     @classmethod
-    def get_params(cls):
+    def get_args(cls):
         """
         Get the parameters of the Square class.
 
         Returns:
             tuple: Tuple containing the parameters of the Square class.
         """
-        params = super().get_params() + tuple(cls.__params.keys())
-        removed_params = ("width", "height")
 
-        params = tuple(
-            filter(lambda param: param not in removed_params, params)
-        )
-
-        return params
+        return tuple(cls.__args_with_default_values.keys())
 
     @classmethod
-    def get_params_with_default_values(cls):
+    def get_args_with_default_values(cls):
         """
         Get the parameters with default values.
 
@@ -116,14 +110,7 @@ class Square(Rectangle):
             MappingProxyType: Mapping proxy containing parameters and
             their default values.
         """
-        params = dict(cls.__params)
-        params.update(super().get_params_with_default_values())
-        removed_params = ("width", "height")
-
-        params = {key: value for key, value in params.items()
-                  if key not in removed_params}
-
-        return params
+        return dict(cls.__args_with_default_values)
 
     def __str__(self):
         """

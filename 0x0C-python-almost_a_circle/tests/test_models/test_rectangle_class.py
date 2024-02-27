@@ -305,37 +305,44 @@ class TestRectangleStdout(unittest.TestCase):
     def test_str_method_width_height_x(self):
         rectangle = Rectangle(5, 5, 1)
         expected_output = f"[Rectangle] ({rectangle.id}) 1/0 - 5/5\n"
-        self.assertEqual(expected_output, self.capture_stdout(rectangle, "print"))
+        self.assertEqual(expected_output,
+                         self.capture_stdout(rectangle, "print"))
 
     def test_str_method_width_height_x_y(self):
         rectangle = Rectangle(1, 8, 2, 4)
         expected_output = f"[Rectangle] ({rectangle.id}) 2/4 - 1/8\n"
-        self.assertEqual(expected_output, self.capture_stdout(rectangle, "print"))
+        self.assertEqual(expected_output,
+                         self.capture_stdout(rectangle, "print"))
 
     def test_str_method_width_height_x_y_id(self):
         rectangle = Rectangle(13, 21, 2, 4, 7)
         expected_output = "[Rectangle] (7) 2/4 - 13/21\n"
-        self.assertEqual(expected_output, self.capture_stdout(rectangle, "print"))
+        self.assertEqual(expected_output,
+                         self.capture_stdout(rectangle, "print"))
 
     def test_display_width_height(self):
         rectangle = Rectangle(2, 3, 0, 0, 0)
         expected_output = "##\n##\n##\n"
-        self.assertEqual(expected_output, self.capture_stdout(rectangle, "display"))
+        self.assertEqual(expected_output,
+                         self.capture_stdout(rectangle, "display"))
 
     def test_display_width_height_x(self):
         rectangle = Rectangle(3, 2, 1, 0, 1)
         expected_output = " ###\n ###\n"
-        self.assertEqual(expected_output, self.capture_stdout(rectangle, "display"))
+        self.assertEqual(expected_output,
+                         self.capture_stdout(rectangle, "display"))
 
     def test_display_width_height_y(self):
         rectangle = Rectangle(4, 5, 0, 1, 0)
         expected_output = "\n####\n####\n####\n####\n####\n"
-        self.assertEqual(expected_output, self.capture_stdout(rectangle, "display"))
+        self.assertEqual(expected_output,
+                         self.capture_stdout(rectangle, "display"))
 
     def test_display_width_height_x_y(self):
         rectangle = Rectangle(2, 4, 3, 2, 0)
         expected_output = "\n\n   ##\n   ##\n   ##\n   ##\n"
-        self.assertEqual(expected_output, self.capture_stdout(rectangle, "display"))
+        self.assertEqual(expected_output,
+                         self.capture_stdout(rectangle, "display"))
 
     def test_str_method_changed_attributes(self):
         rectangle = Rectangle(7, 7, 0, 0, [4])
@@ -344,7 +351,8 @@ class TestRectangleStdout(unittest.TestCase):
         rectangle.x = 8
         rectangle.y = 10
         expected_output = "[Rectangle] ([4]) 8/10 - 15/1\n"
-        self.assertEqual(expected_output, self.capture_stdout(rectangle, "print"))
+        self.assertEqual(expected_output,
+                         self.capture_stdout(rectangle, "print"))
 
     def test_str_method_one_arg(self):
         rectangle = Rectangle(1, 2, 3, 4, 5)

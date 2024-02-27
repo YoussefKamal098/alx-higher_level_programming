@@ -18,7 +18,8 @@ class Rectangle(Base):
     conversion to dictionaries.
     """
     __slots__ = ("__width", "__height", "__x", "__y")
-    __params = {"width": 1, "height": 1, "x": 0, "y": 0}
+    __args_with_default_values = {"id": None, "width": 1, "height": 1,
+                                  "x": 0, "y": 0}
 
     def __init__(self, width, height, x=0, y=0, id=None):
         """
@@ -163,16 +164,16 @@ class Rectangle(Base):
             *args: Variable-length argument list.
             **kwargs: Arbitrary keyword arguments.
         """
-        params = Rectangle.get_params()
+        rectangle_args = Rectangle.get_args()
 
         if args:
-            for i, param in enumerate(params):
-                setattr(self, param,
-                        args[i] if i < len(args) else getattr(self, param))
+            for i, arg in enumerate(rectangle_args):
+                setattr(self, arg,
+                        args[i] if i < len(args) else getattr(self, arg))
         elif kwargs:
-            for param in params:
-                setattr(self, param,
-                        kwargs.get(param, getattr(self, param)))
+            for arg in rectangle_args:
+                setattr(self, arg,
+                        kwargs.get(arg, getattr(self, arg)))
 
     def to_dictionary(self):
         """
@@ -182,22 +183,21 @@ class Rectangle(Base):
             dict: Dictionary containing rectangle attributes.
         """
         return {
-            params: getattr(self, params) for params in Rectangle.get_params()
+            arg: getattr(self, arg) for arg in Rectangle.get_args()
         }
 
     @classmethod
-    def get_params(cls):
+    def get_args(cls):
         """
         Get the parameters of the Rectangle class.
 
         Returns:
             tuple: Tuple containing the parameters of the Rectangle class.
         """
-        params = super().get_params() + tuple(cls.__params.keys())
-        return params
+        return tuple(cls.__args_with_default_values.keys())
 
     @classmethod
-    def get_params_with_default_values(cls):
+    def get_args_with_default_values(cls):
         """
         Get the parameters with default values.
 
@@ -205,9 +205,7 @@ class Rectangle(Base):
             MappingProxyType: Mapping proxy containing parameters and
             their default values.
         """
-        params = dict(cls.__params)
-        params.update(super().get_params_with_default_values())
-        return params
+        return dict(cls.__args_with_default_values)
 
     def __str__(self):
         """

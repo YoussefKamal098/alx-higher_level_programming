@@ -23,7 +23,7 @@ class Base:
     - id (int): An identifier for the object.
     """
     __slots__ = ("id",)
-    __params = {"id": None}
+    __args_with_default_values = {"id": None}
 
     __nb_objects = 0
 
@@ -125,7 +125,7 @@ class Base:
         Returns:
         - Base: A new instance of the class.
         """
-        new_instance = cls(**cls.get_params_with_default_values())
+        new_instance = cls(**cls.get_args_with_default_values())
         new_instance.update(**dictionary)
         return new_instance
 
@@ -166,7 +166,7 @@ class Base:
 
             first_obj = list_objs[0]
 
-            writer = csv.DictWriter(file, fieldnames=first_obj.get_params())
+            writer = csv.DictWriter(file, fieldnames=first_obj.get_args())
             writer.writeheader()
 
             for obj in list_objs:
@@ -188,7 +188,7 @@ class Base:
         with open(file_path, "r", newline="") as file:
             reader = csv.DictReader(file)
 
-            cls._check_csv_file_required_fields(file_path, cls.get_params())
+            cls._check_csv_file_required_fields(file_path, cls.get_args())
 
             list_dictionary = [{key: int(value) for key, value in row.items()}
                                for row in reader]
@@ -346,24 +346,24 @@ class Base:
         return os.path.splitext(file_path)[1].lower()
 
     @classmethod
-    def get_params(cls):
+    def get_args(cls):
         """
         Get the parameter names of the class.
 
         Returns:
         - tuple: Tuple of parameter names.
         """
-        return tuple(cls.__params.keys())
+        return tuple(cls.__args_with_default_values.keys())
 
     @classmethod
-    def get_params_with_default_values(cls):
+    def get_args_with_default_values(cls):
         """
         Get the parameters with their default values as a mapping.
 
         Returns:
         - dict: Mapping of parameters to their default values.
         """
-        return cls.__params
+        return dict(cls.__args_with_default_values)
 
     @staticmethod
     def draw(list_rectangles, list_squares):
