@@ -35,20 +35,20 @@ class TestRectangleInstantiation(unittest.TestCase):
             Rectangle(1)
 
     def test_id_incrementation(self):
-        r1 = Rectangle(10, 2)
-        r2 = Rectangle(2, 10)
-        r3 = Rectangle(2, 2, 4)
-        r4 = Rectangle(4, 4, 2)
-        r5 = Rectangle(1, 2, 3, 4)
-        r6 = Rectangle(4, 3, 2, 1)
+        rectangle1 = Rectangle(10, 2)
+        rectangle2 = Rectangle(2, 10)
+        rectangle3 = Rectangle(2, 2, 4)
+        rectangle4 = Rectangle(4, 4, 2)
+        rectangle5 = Rectangle(1, 2, 3, 4)
+        rectangle6 = Rectangle(4, 3, 2, 1)
 
-        self.assertEqual(r1.id, r2.id - 1)
-        self.assertEqual(r3.id, r4.id - 1)
-        self.assertEqual(r5.id, r6.id - 1)
+        self.assertEqual(rectangle1.id, rectangle2.id - 1)
+        self.assertEqual(rectangle3.id, rectangle4.id - 1)
+        self.assertEqual(rectangle5.id, rectangle6.id - 1)
 
     def test_valid_args(self):
-        r = Rectangle(10, 2, 0, 0, 7)
-        self.assertEqual(7, r.id)
+        rectangle = Rectangle(10, 2, 0, 0, 7)
+        self.assertEqual(7, rectangle.id, )
 
     def test_invalid_more_than_five_args(self):
         with self.assertRaises(TypeError):
@@ -66,28 +66,28 @@ class TestRectangleInstantiation(unittest.TestCase):
             print(r.__y)
 
     def test_width_getter_setter(self):
-        r = Rectangle(5, 7, 7, 5, 1)
-        self.assertEqual(5, r.width)
-        r.width = 10
-        self.assertEqual(10, r.width)
+        rectangle = Rectangle(5, 7, 7, 5, 1)
+        self.assertEqual(5, rectangle.width)
+        rectangle.width = 10
+        self.assertEqual(10, rectangle.width)
 
     def test_height_getter_setter(self):
-        r = Rectangle(5, 7, 7, 5, 1)
-        self.assertEqual(7, r.height)
-        r.height = 10
-        self.assertEqual(10, r.height)
+        rectangle = Rectangle(5, 7, 7, 5, 1)
+        self.assertEqual(7, rectangle.height)
+        rectangle.height = 10
+        self.assertEqual(10, rectangle.height)
 
     def test_x_getter_setter(self):
-        r = Rectangle(5, 7, 7, 5, 1)
-        self.assertEqual(7, r.x)
-        r.x = 10
-        self.assertEqual(10, r.x)
+        rectangle = Rectangle(5, 7, 7, 5, 1)
+        self.assertEqual(7, rectangle.x)
+        rectangle.x = 10
+        self.assertEqual(10, rectangle.x)
 
     def test_y_getter_setter(self):
-        r = Rectangle(5, 7, 7, 5, 1)
-        self.assertEqual(5, r.y)
-        r.y = 10
-        self.assertEqual(10, r.y)
+        rectangle = Rectangle(5, 7, 7, 5, 1)
+        self.assertEqual(5, rectangle.y)
+        rectangle.y = 10
+        self.assertEqual(10, rectangle.y)
 
 
 class TestRectangleWidthAttribute(unittest.TestCase):
@@ -311,53 +311,55 @@ class TestRectangleStdout(unittest.TestCase):
         self.assert_str_output(r, f"[Rectangle] ({r.id}) 0/0 - 4/6\n")
 
     def test_str_method_width_height_x(self):
-        r = Rectangle(5, 5, 1)
-        self.assert_str_output(r, f"[Rectangle] ({r.id}) 1/0 - 5/5\n")
+        rectangle = Rectangle(5, 5, 1)
+        self.assert_str_output(rectangle,
+                               f"[Rectangle] ({rectangle.id}) 1/0 - 5/5\n")
 
     def test_str_method_width_height_x_y(self):
-        r = Rectangle(1, 8, 2, 4)
-        self.assert_str_output(r, f"[Rectangle] ({r.id}) 2/4 - 1/8\n")
+        rectangle = Rectangle(1, 8, 2, 4)
+        self.assert_str_output(rectangle,
+                               f"[Rectangle] ({rectangle.id}) 2/4 - 1/8\n")
 
     def test_str_method_width_height_x_y_id(self):
-        r = Rectangle(13, 21, 2, 4, 7)
-        self.assert_str_output(r, "[Rectangle] (7) 2/4 - 13/21\n")
+        rectangle = Rectangle(13, 21, 2, 4, 7)
+        self.assert_str_output(rectangle, "[Rectangle] (7) 2/4 - 13/21\n")
 
     def test_str_method_changed_attributes(self):
-        r = Rectangle(7, 7, 0, 0, [4])
-        r.width = 15
-        r.height = 1
-        r.x = 8
-        r.y = 10
-        self.assert_str_output(r, "[Rectangle] ([4]) 8/10 - 15/1\n")
+        rectangle = Rectangle(7, 7, 0, 0, [4])
+        rectangle.width = 15
+        rectangle.height = 1
+        rectangle.x = 8
+        rectangle.y = 10
+        self.assert_str_output(rectangle, "[Rectangle] ([4]) 8/10 - 15/1\n")
 
     def test_str_method_one_arg(self):
-        r = Rectangle(1, 2, 3, 4, 5)
+        rectangle = Rectangle(1, 2, 3, 4, 5)
         with self.assertRaises(TypeError):
-            r.__str__(1)
+            rectangle.__str__(1)
 
     # Test display method
     def test_display_width_height(self):
-        r = Rectangle(2, 3, 0, 0, 0)
-        self.assert_display_output(r, "##\n##\n##\n")
+        rectangle = Rectangle(2, 3, 0, 0, 0)
+        self.assert_display_output(rectangle, "##\n##\n##\n")
 
     def test_display_width_height_x(self):
-        r = Rectangle(3, 2, 1, 0, 1)
-        self.assert_display_output(r, " ###\n ###\n")
+        rectangle = Rectangle(3, 2, 1, 0, 1)
+        self.assert_display_output(rectangle, " ###\n ###\n")
 
     def test_display_width_height_y(self):
-        r = Rectangle(4, 5, 0, 1, 0)
+        rectangle = Rectangle(4, 5, 0, 1, 0)
         display = "\n####\n####\n####\n####\n####\n"
-        self.assert_display_output(r, display)
+        self.assert_display_output(rectangle, display)
 
     def test_display_width_height_x_y(self):
-        r = Rectangle(2, 4, 3, 2, 0)
+        rectangle = Rectangle(2, 4, 3, 2, 0)
         display = "\n\n   ##\n   ##\n   ##\n   ##\n"
-        self.assert_display_output(r, display)
+        self.assert_display_output(rectangle, display)
 
     def test_display_one_arg(self):
-        r = Rectangle(5, 1, 2, 4, 7)
+        rectangle = Rectangle(5, 1, 2, 4, 7)
         with self.assertRaises(TypeError):
-            r.display(1)
+            rectangle.display(1)
 
 
 class TestRectangleUpdateMethodWithArgs(unittest.TestCase):
@@ -384,9 +386,9 @@ class TestRectangleUpdateMethodWithArgs(unittest.TestCase):
 
         for args, expected_result in valid_test_cases:
             with self.subTest(args=args):
-                r = Rectangle(*self.initialValues)
-                r.update(*args)
-                self.assertEqual(str(r), expected_result)
+                rectangle = Rectangle(*self.initialValues)
+                rectangle.update(*args)
+                self.assertEqual(str(rectangle), expected_result)
 
     def test_update_invalid_args(self):
         invalid_test_cases = [
@@ -422,9 +424,9 @@ class TestRectangleUpdateMethodWithArgs(unittest.TestCase):
 
         for args, error_type, error_msg in invalid_test_cases:
             with self.subTest(args=args):
-                r = Rectangle(*self.initialValues)
+                rectangle = Rectangle(*self.initialValues)
                 with self.assertRaisesRegex(error_type, error_msg):
-                    r.update(*args)
+                    rectangle.update(*args)
 
 
 class TestRectangleUpdateMethodWithKwargs(unittest.TestCase):
@@ -487,9 +489,9 @@ class TestRectangleUpdateMethodWithKwargs(unittest.TestCase):
 
         for kwargs, error_type, error_msg in invalid_test_cases:
             with self.subTest(kwargs=kwargs):
-                r = Rectangle(*self.initialValues)
+                rectangle = Rectangle(*self.initialValues)
                 with self.assertRaisesRegex(error_type, error_msg):
-                    r.update(**kwargs)
+                    rectangle.update(**kwargs)
 
 
 class TestRectangleToDictionaryMethod(unittest.TestCase):
@@ -498,20 +500,20 @@ class TestRectangleToDictionaryMethod(unittest.TestCase):
     """
 
     def test_to_dictionary_output(self):
-        r = Rectangle(10, 2, 1, 9, 5)
+        rectangle = Rectangle(10, 2, 1, 9, 5)
         correct = {'x': 1, 'y': 9, 'id': 5, 'height': 2, 'width': 10}
-        self.assertDictEqual(correct, r.to_dictionary())
+        self.assertDictEqual(correct, rectangle.to_dictionary())
 
     def test_to_dictionary_no_object_changes(self):
-        r1 = Rectangle(10, 2, 1, 9, 5)
-        r2 = Rectangle(5, 9, 1, 2, 10)
-        r2.update(**r1.to_dictionary())
-        self.assertNotEqual(r1, r2)
+        rectangle1 = Rectangle(10, 2, 1, 9, 5)
+        rectangle2 = Rectangle(5, 9, 1, 2, 10)
+        rectangle2.update(**rectangle1.to_dictionary())
+        self.assertNotEqual(rectangle1, rectangle2)
 
     def test_to_dictionary_arg(self):
-        r = Rectangle(10, 2, 4, 1, 2)
+        rectangle = Rectangle(10, 2, 4, 1, 2)
         with self.assertRaises(TypeError):
-            r.to_dictionary(1)
+            rectangle.to_dictionary(1)
 
 
 if __name__ == "__main__":

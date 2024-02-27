@@ -33,22 +33,22 @@ class TestSquareInstantiation(unittest.TestCase):
             Square()
 
     def test_one_arg(self):
-        s1 = Square(10)
-        s2 = Square(11)
-        self.assertEqual(s1.id, s2.id - 1)
+        square1 = Square(10)
+        square2 = Square(11)
+        self.assertEqual(square1.id, square2.id - 1)
 
     def test_size_and_id(self):
-        s1 = Square(10, 2)
-        s2 = Square(2, 10)
-        self.assertEqual(s1.id, s2.id - 1)
-        self.assertEqual(s1.size, 10)
+        square1 = Square(10, 2)
+        square2 = Square(2, 10)
+        self.assertEqual(square1.id, square2.id - 1)
+        self.assertEqual(square1.size, 10)
 
     def test_size_and_position(self):
-        s1 = Square(10, 2, 2)
-        s2 = Square(2, 2, 10)
-        self.assertEqual(s1.id, s2.id - 1)
-        self.assertEqual(2, s1.x)
-        self.assertEqual(2, s1.y)
+        square1 = Square(10, 2, 2)
+        square2 = Square(2, 2, 10)
+        self.assertEqual(square1.id, square2.id - 1)
+        self.assertEqual(2, square1.x)
+        self.assertEqual(2, square1.y)
 
     def test_size_position_and_id(self):
         square = Square(10, 2, 2, 7)
@@ -63,19 +63,19 @@ class TestSquareInstantiation(unittest.TestCase):
 
     def test_size_private(self):
         with self.assertRaises(AttributeError):
-            _ = Square(10, 2, 3, 4).__size
+            Square(10, 2, 3, 4).__size
 
     def test_size_getter_and_setter(self):
-        s = Square(4, 1, 9, 2)
-        self.assertEqual(4, s.size)
-        s.size = 8
-        self.assertEqual(8, s.size)
+        square = Square(4, 1, 9, 2)
+        self.assertEqual(4, square.size)
+        square.size = 8
+        self.assertEqual(8, square.size)
 
     def test_width_and_height_getter(self):
-        s = Square(4, 1, 9, 2)
-        s.size = 8
-        self.assertEqual(8, s.width)
-        self.assertEqual(8, s.height)
+        square = Square(4, 1, 9, 2)
+        square.size = 8
+        self.assertEqual(8, square.width)
+        self.assertEqual(8, square.height)
 
     def test_x_and_y_getter(self):
         self.assertEqual(0, Square(10).x)
@@ -95,15 +95,18 @@ class TestSquareSizeAttribute(unittest.TestCase):
                   float('inf'), float('nan')]
 
         for value in values:
-            with self.assertRaisesRegex(TypeError, "width must be an integer"):
-                Square(value)
+            with self.subTest(value=value):
+                with self.assertRaisesRegex(TypeError,
+                                            "width must be an integer"):
+                    Square(value)
 
     def test_invalid_value(self):
         values = [-1, 0]
 
         for value in values:
-            with self.assertRaisesRegex(ValueError, "width must be > 0"):
-                Square(value)
+            with self.subTest(value=value):
+                with self.assertRaisesRegex(ValueError, "width must be > 0"):
+                    Square(value)
 
     def test_valid_value(self):
         values = [1, 2, 10, 50, 100, 200, 1000000]
@@ -125,15 +128,17 @@ class TestSquareXAttribute(unittest.TestCase):
                   float('inf'), float('nan')]
 
         for value in values:
-            with self.assertRaisesRegex(TypeError, "x must be an integer"):
-                Square(2, value)
+            with self.subTest(value=value):
+                with self.assertRaisesRegex(TypeError, "x must be an integer"):
+                    Square(2, value)
 
     def test_invalid_value(self):
         values = [-1, -2, -10, -50, -100, -200, -1000000]
 
         for value in values:
-            with self.assertRaisesRegex(ValueError, "x must be >= 0"):
-                Square(2, value)
+            with self.subTest(value=value):
+                with self.assertRaisesRegex(ValueError, "x must be >= 0"):
+                    Square(2, value)
 
     def test_valid_value(self):
         values = [0, 1, 2, 10, 50, 100, 200, 1000000]
@@ -155,15 +160,17 @@ class TestSquareYAttribute(unittest.TestCase):
                   float('inf'), float('nan')]
 
         for value in values:
-            with self.assertRaisesRegex(TypeError, "y must be an integer"):
-                Square(2, 2, value)
+            with self.subTest(value=value):
+                with self.assertRaisesRegex(TypeError, "y must be an integer"):
+                    Square(2, 2, value)
 
     def test_invalid_value(self):
         values = [-1, -2, -10, -50, -100, -200, -1000000]
 
         for value in values:
-            with self.assertRaisesRegex(ValueError, "y must be >= 0"):
-                Square(2, 2, value)
+            with self.subTest(value=value):
+                with self.assertRaisesRegex(ValueError, "y must be >= 0"):
+                    Square(2, 2, value)
 
     def test_valid_value(self):
         values = [0, 1, 2, 10, 50, 100, 200, 1000000]
@@ -199,18 +206,18 @@ class TestSquareAreaMethod(unittest.TestCase):
         self.assertEqual(100, Square(10, 0, 0, 1).area())
 
     def test_area_large(self):
-        s = Square(999999999999999999, 0, 0, 1)
-        self.assertEqual(999999999999999998000000000000000001, s.area())
+        square = Square(999999999999999999, 0, 0, 1)
+        self.assertEqual(999999999999999998000000000000000001, square.area())
 
     def test_area_changed_attributes(self):
-        s = Square(2, 0, 0, 1)
-        s.size = 7
-        self.assertEqual(49, s.area())
+        square = Square(2, 0, 0, 1)
+        square.size = 7
+        self.assertEqual(49, square.area())
 
     def test_area_one_arg(self):
-        s = Square(2, 10, 1, 1)
+        square = Square(2, 10, 1, 1)
         with self.assertRaises(TypeError):
-            s.area(1)
+            square.area(1)
 
 
 class TestSquareStdout(unittest.TestCase):
@@ -230,64 +237,64 @@ class TestSquareStdout(unittest.TestCase):
         return capture
 
     def test_str_method_print_size(self):
-        s = Square(4)
-        capture = TestSquareStdout.capture_stdout(s, "print")
-        correct = "[Square] ({}) 0/0 - 4\n".format(s.id)
+        square = Square(4)
+        capture = TestSquareStdout.capture_stdout(square, "print")
+        correct = "[Square] ({}) 0/0 - 4\n".format(square.id)
         self.assertEqual(correct, capture.getvalue())
 
     def test_str_method_size_x(self):
-        s = Square(5, 5)
-        correct = "[Square] ({}) 5/0 - 5".format(s.id)
-        self.assertEqual(correct, s.__str__())
+        square = Square(5, 5)
+        correct = "[Square] ({}) 5/0 - 5".format(square.id)
+        self.assertEqual(correct, square.__str__())
 
     def test_str_method_size_x_y(self):
-        s = Square(7, 4, 22)
-        correct = "[Square] ({}) 4/22 - 7".format(s.id)
-        self.assertEqual(correct, str(s))
+        square = Square(7, 4, 22)
+        correct = "[Square] ({}) 4/22 - 7".format(square.id)
+        self.assertEqual(correct, str(square))
 
     def test_str_method_size_x_y_id(self):
-        s = Square(2, 88, 4, 19)
-        self.assertEqual("[Square] (19) 88/4 - 2", str(s))
+        square = Square(2, 88, 4, 19)
+        self.assertEqual("[Square] (19) 88/4 - 2", str(square))
 
     def test_str_method_changed_attributes(self):
-        s = Square(7, 0, 0, [4])
-        s.size = 15
-        s.x = 8
-        s.y = 10
-        self.assertEqual("[Square] ([4]) 8/10 - 15", str(s))
+        square = Square(7, 0, 0, [4])
+        square.size = 15
+        square.x = 8
+        square.y = 10
+        self.assertEqual("[Square] ([4]) 8/10 - 15", str(square))
 
     def test_str_method_one_arg(self):
-        s = Square(1, 2, 3, 4)
+        square = Square(1, 2, 3, 4)
         with self.assertRaises(TypeError):
-            s.__str__(1)
+            square.__str__(1)
 
     # Test display method
     def test_display_size(self):
-        s = Square(2, 0, 0, 9)
-        capture = TestSquareStdout.capture_stdout(s, "display")
+        square = Square(2, 0, 0, 9)
+        capture = TestSquareStdout.capture_stdout(square, "display")
         self.assertEqual("##\n##\n", capture.getvalue())
 
     def test_display_size_x(self):
-        s = Square(3, 1, 0, 18)
-        capture = TestSquareStdout.capture_stdout(s, "display")
+        square = Square(3, 1, 0, 18)
+        capture = TestSquareStdout.capture_stdout(square, "display")
         self.assertEqual(" ###\n ###\n ###\n", capture.getvalue())
 
     def test_display_size_y(self):
-        s = Square(4, 0, 1, 9)
-        capture = TestSquareStdout.capture_stdout(s, "display")
+        square = Square(4, 0, 1, 9)
+        capture = TestSquareStdout.capture_stdout(square, "display")
         display = "\n####\n####\n####\n####\n"
         self.assertEqual(display, capture.getvalue())
 
     def test_display_size_x_y(self):
-        s = Square(2, 3, 2, 1)
-        capture = TestSquareStdout.capture_stdout(s, "display")
+        square = Square(2, 3, 2, 1)
+        capture = TestSquareStdout.capture_stdout(square, "display")
         display = "\n\n   ##\n   ##\n"
         self.assertEqual(display, capture.getvalue())
 
     def test_display_one_arg(self):
-        s = Square(3, 4, 5, 2)
+        square = Square(3, 4, 5, 2)
         with self.assertRaises(TypeError):
-            s.display(1)
+            square.display(1)
 
 
 class TestRectangleUpdateMethodWithArgs(unittest.TestCase):
@@ -314,9 +321,9 @@ class TestRectangleUpdateMethodWithArgs(unittest.TestCase):
 
         for args, expected_result in valid_test_cases:
             with self.subTest(args=args):
-                s = Square(*self.initialValues)
-                s.update(*args)
-                self.assertEqual(str(s), expected_result)
+                square = Square(*self.initialValues)
+                square.update(*args)
+                self.assertEqual(str(square), expected_result)
 
     def test_update_invalid_args(self):
         invalid_test_cases = [
@@ -340,9 +347,9 @@ class TestRectangleUpdateMethodWithArgs(unittest.TestCase):
 
         for args, error_type, error_msg in invalid_test_cases:
             with self.subTest(args=args):
-                s = Square(*self.initialValues)
+                square = Square(*self.initialValues)
                 with self.assertRaisesRegex(error_type, error_msg):
-                    s.update(*args)
+                    square.update(*args)
 
 
 class TestRectangleUpdateMethodWithKwargs(unittest.TestCase):
@@ -374,9 +381,9 @@ class TestRectangleUpdateMethodWithKwargs(unittest.TestCase):
 
         for kwargs, expected_result in valid_test_cases:
             with self.subTest(kwargs=kwargs):
-                s = Square(*self.initialValues)
-                s.update(**kwargs)
-                self.assertEqual(str(s), expected_result)
+                square = Square(*self.initialValues)
+                square.update(**kwargs)
+                self.assertEqual(str(square), expected_result)
 
     def test_update_invalid_kwargs(self):
         invalid_test_cases = [
@@ -402,9 +409,9 @@ class TestRectangleUpdateMethodWithKwargs(unittest.TestCase):
 
         for kwargs, error_type, error_msg in invalid_test_cases:
             with self.subTest(kwargs=kwargs):
-                s = Square(*self.initialValues)
+                square = Square(*self.initialValues)
                 with self.assertRaisesRegex(error_type, error_msg):
-                    s.update(**kwargs)
+                    square.update(**kwargs)
 
 
 class TestSquareToDictionaryMethod(unittest.TestCase):
@@ -413,20 +420,20 @@ class TestSquareToDictionaryMethod(unittest.TestCase):
     """
 
     def test_to_dictionary_output(self):
-        s = Square(10, 2, 1, 1)
+        square = Square(10, 2, 1, 1)
         correct = {'id': 1, 'x': 2, 'size': 10, 'y': 1}
-        self.assertDictEqual(correct, s.to_dictionary())
+        self.assertDictEqual(correct, square.to_dictionary())
 
     def test_to_dictionary_no_object_changes(self):
-        s1 = Square(10, 2, 1, 2)
-        s2 = Square(1, 2, 10)
-        s2.update(**s1.to_dictionary())
-        self.assertNotEqual(s1, s2)
+        square1 = Square(10, 2, 1, 2)
+        square2 = Square(1, 2, 10)
+        square2.update(**square1.to_dictionary())
+        self.assertNotEqual(square1, square2)
 
     def test_to_dictionary_arg(self):
-        s = Square(10, 10, 10, 10)
+        square = Square(10, 10, 10, 10)
         with self.assertRaises(TypeError):
-            s.to_dictionary(1)
+            square.to_dictionary(1)
 
 
 if __name__ == "__main__":
