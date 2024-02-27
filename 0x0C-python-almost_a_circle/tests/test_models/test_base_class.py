@@ -12,6 +12,7 @@ code integrity across different scenarios. Each test class focuses on a
 specific set of functionalities, providing clear and organized validation
 for the implemented features of the application.
 """
+import json
 import os
 import unittest
 
@@ -72,39 +73,38 @@ class TestBaseToJsonStringMethod(unittest.TestCase):
     Test cases for the to_json_string method of the Base class.
     """
 
-    def test_to_json_string_rectangle_type(self):
+    def test_to_json_string_return_type(self):
         rectangle = Rectangle(10, 7, 2, 8, 6)
         json_string = Base.to_json_string([rectangle.to_dictionary()])
-        self.assertEqual(str, type(json_string))
+        self.assertIsInstance(json_string, str)
 
-    def test_to_json_string_rectangle_one_dict(self):
+        square = Square(10, 2, 3, 4)
+        json_string = Base.to_json_string([square.to_dictionary()])
+        self.assertIsInstance(json_string, str)
+
+    def test_to_json_string_rectangle(self):
         rectangle = Rectangle(10, 7, 2, 8, 6)
         json_string = Base.to_json_string([rectangle.to_dictionary()])
-        self.assertEqual(len(json_string), 53)
+        self.assertEqual(json_string, json.dumps([rectangle.to_dictionary()]))
 
-    def test_to_json_string_rectangle_two_dicts(self):
+    def test_to_json_string_rectangle_multiple_dicts(self):
         rectangle1 = Rectangle(2, 3, 5, 19, 2)
         rectangle2 = Rectangle(4, 2, 4, 1, 12)
         list_dicts = [rectangle1.to_dictionary(), rectangle2.to_dictionary()]
         json_string = Base.to_json_string(list_dicts)
-        self.assertEqual(len(json_string), 106)
+        self.assertEqual(json_string, json.dumps(list_dicts))
 
-    def test_to_json_string_square_type(self):
+    def test_to_json_string_square(self):
         square = Square(10, 2, 3, 4)
         json_string = Base.to_json_string([square.to_dictionary()])
-        self.assertEqual(str, type(json_string))
+        self.assertEqual(json_string, json.dumps([square.to_dictionary()]))
 
-    def test_to_json_string_square_one_dict(self):
-        square = Square(10, 2, 3, 4)
-        json_string = Base.to_json_string([square.to_dictionary()])
-        self.assertEqual(len(json_string), 39)
-
-    def test_to_json_string_square_two_dicts(self):
+    def test_to_json_string_square_multiple_dicts(self):
         square1 = Square(10, 2, 3, 4)
         square2 = Square(4, 5, 21, 2)
         list_dicts = [square1.to_dictionary(), square2.to_dictionary()]
         json_string = Base.to_json_string(list_dicts)
-        self.assertEqual(len(json_string), 78)
+        self.assertEqual(json_string, json.dumps(list_dicts))
 
     def test_to_json_string_empty_list(self):
         self.assertEqual("[]", Base.to_json_string([]))
@@ -135,47 +135,68 @@ class TestBaseSaveToFileMethod(unittest.TestCase):
             except IOError:
                 pass
 
-    def test_save_to_file_one_rectangle(self):
+    def test_save_to_file(self):
         rectangle = Rectangle(10, 7, 2, 8, 5)
-        Rectangle.save_to_file([rectangle])
-        with open("Rectangle.json", "r") as f:
-            self.assertEqual(len(f.read()), 53)
+        square = Square(10, 7, 2, 8)
 
-    def test_save_to_file_two_rectangles(self):
+        # Test save_to_file for Rectangle
+        Rectangle.save_to_file([rectangle])
+        with open("Rectangle.json", "r") as file:
+            data = json.load(file)
+            self.assertEqual(data, [rectangle.to_dictionary()])
+
+        # Test save_to_file for Square
+        Square.save_to_file([square])
+        with open("Square.json", "r") as file:
+            data = json.load(file)
+            self.assertEqual(data, [square.to_dictionary()])
+
+    def test_save_to_file_multiple_objects(self):
         rectangle1 = Rectangle(10, 7, 2, 8, 5)
         rectangle2 = Rectangle(2, 4, 1, 2, 3)
-        Rectangle.save_to_file([rectangle1, rectangle2])
-        with open("Rectangle.json", "r") as f:
-            self.assertEqual(len(f.read()), 105)
-
-    def test_save_to_file_one_square(self):
-        square = Square(10, 7, 2, 8)
-        Square.save_to_file([square])
-        with open("Square.json", "r") as f:
-            self.assertEqual(len(f.read()), 39)
-
-    def test_save_to_file_two_squares(self):
         square1 = Square(10, 7, 2, 8)
         square2 = Square(8, 1, 2, 3)
+
+        # Test save_to_file for Rectangle
+        Rectangle.save_to_file([rectangle1, rectangle2])
+        with open("Rectangle.json", "r") as file:
+            data = json.load(file)
+            self.assertEqual(data, [rectangle1.to_dictionary(),
+                                    rectangle2.to_dictionary()])
+
+        # Test save_to_file for Square
         Square.save_to_file([square1, square2])
-        with open("Square.json", "r") as f:
-            self.assertEqual(len(f.read()), 77)
+        with open("Square.json", "r") as file:
+            data = json.load(file)
+            self.assertEqual(data, [square1.to_dictionary(),
+                                    square2.to_dictionary()])
 
     def test_save_to_file_cls_name_for_filename(self):
         square = Square(10, 7, 2, 8)
+
+        # Test save_to_file with Base class (filename should be 'Base.json')
         Base.save_to_file([square])
-        with open("Base.json", "r") as f:
-            self.assertEqual(len(f.read()), 39)
+        with open("Base.json", "r") as file:
+            data = json.load(file)
+            self.assertEqual(data, [square.to_dictionary()])
 
     def test_save_to_file_overwrite(self):
-        square = Square(9, 2, 39, 2)
-        Square.save_to_file([square])
-        square = Square(10, 7, 2, 8)
-        Square.save_to_file([square])
-        with open("Square.json", "r") as f:
-            self.assertEqual(len(f.read()), 39)
+        square1 = Square(9, 2, 39, 2)
 
-    def test_save_to_file_None(self):
+        # Save square1 to file
+        Square.save_to_file([square1])
+
+        # Modify square1 and save again to the same file
+        square1 = Square(10, 7, 2, 8)
+        Square.save_to_file([square1])
+
+        # Check if file size remains the same (no new entries)
+        with open("Square.json", "r") as file:
+            data = json.load(file)
+            self.assertEqual(data, [square1.to_dictionary()])
+
+    def test_save_to_file_with_none_or_empty_list(self):
+        # Test save_to_file with None input
         Square.save_to_file(None)
         with open("Square.json", "r") as f:
             self.assertEqual("[]", f.read())
@@ -184,7 +205,7 @@ class TestBaseSaveToFileMethod(unittest.TestCase):
         with open("Rectangle.json", "r") as f:
             self.assertEqual("[]", f.read())
 
-    def test_save_to_file_empty_list(self):
+        # Test save_to_file with empty list
         Square.save_to_file([])
         with open("Square.json", "r") as f:
             self.assertEqual("[]", f.read())
@@ -193,11 +214,12 @@ class TestBaseSaveToFileMethod(unittest.TestCase):
         with open("Rectangle.json", "r") as f:
             self.assertEqual("[]", f.read())
 
-    def test_save_to_file_no_args(self):
+    def test_save_to_file_invalid_args(self):
+        # Test save_to_file with no arguments
         with self.assertRaises(TypeError):
             Rectangle.save_to_file()
 
-    def test_save_to_file_more_than_one_arg(self):
+        # Test save_to_file with more than one argument
         with self.assertRaises(TypeError):
             Square.save_to_file([], 1)
 
@@ -319,7 +341,7 @@ class TestBaseLoadFromFileMethod(unittest.TestCase):
 
     @classmethod
     def tearDown(cls):
-        file_list = ["Rectangle.json", "Square.json"]
+        file_list = ["Base.json", "Rectangle.json", "Square.json"]
         for file_name in file_list:
             try:
                 os.remove(file_name)
@@ -457,7 +479,7 @@ class TestBaseLoadFromFileCsvMethod(unittest.TestCase):
 
     @classmethod
     def tearDown(cls):
-        file_list = ["Rectangle.csv", "Square.csv"]
+        file_list = ["Base.csv", "Rectangle.csv", "Square.csv"]
         for file_name in file_list:
             try:
                 os.remove(file_name)
