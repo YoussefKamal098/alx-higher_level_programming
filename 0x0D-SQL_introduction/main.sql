@@ -1,0 +1,496 @@
+-------------------------- USE -------------------------
+-- USE myDB; use the database
+
+-------------------------- SHOW -------------------------
+-- SHOW DATABASES; show all databases
+-- SHOW TABLES; show all tables in a specific database
+
+-------------------------- DESCRIBE -------------------------
+-- DESCRIBE employees; show the each field and it's type and other details in specific table
+
+-------------------------- RENAME -------------------------
+-- RENAME TABLE employees to employee; rename specific table
+
+-------------------------- DROP -------------------------
+-- DROP DATABASE myDB; remove a database
+-- DROP TABLE employee; remove specific table in a database
+
+-------------------------- CREATE -------------------------
+-- CREATE DATABASE myDB; create a database
+-- CREATE TABLE employees (
+--    employee_id INT,
+--    first_name VARCHAR(50),
+--    last_name VARCHAR(50),
+--    hourly_paid DECIMAL(5, 2),
+--    hire_date DATE,
+--    my_time TIME,
+--    my_datetime DATETIME
+-- ); create a table in specific database
+
+-------------------------- ALTER -------------------------
+-- ALTER DATABASE myDB READ ONLY = 0
+-- ALTER DATABASE myDB READ ONLY = 1
+-- ALTER TABLE employee ADD phone_number VARCHAR(15); add field to specific table
+-- ALTER TABLE employee RENAME COLUMN employee_id TO id; rename a specific field in a specific table
+-- ALTER TABLE employee MODIFY COLUMN phone_number INT; change the type of a specific field in a specific table
+-- ALTER TABLE employee MODIFY COLUMN phone_number INT AFTER last_name; change the order of a specific field in a specific table
+-- ALTER TABLE employee MODIFY COLUMN phone_number INT FIRST; change the order of a specific field in a specific table
+-- ALTER TABLE employee DROP COLUMN phone_number; remove a specific field in a specific table
+
+-------------------------- INSERT -------------------------
+-- INSERT INTO employee VALUES(1, "Julia", "Joe", 25.50, "2024-22-27"); insert a new record into a specific table
+-- INSERT INTO employee VALUES(1, "Julia", "Joe", 25.50, "2024-3-27"), VALUES(2, "Roth", "Joe", 25.50, "2024-3-27"); insert a new records into a specific table
+-- INSERT INTO employee (id, first_name, last_name) VALUES(1, "Julia", "Joe"); insert specific field into specific table
+-- INSERT INTO employee (id, last_name, first_name) VALUES(2, "Julia", "Joe"); insert specific field into specific table
+
+-------------------------- SELECT -------------------------
+-- SELECT DATABASES(); show the current user database
+-- SELECT * FROM employees; select all records in specific table
+-- SELECT first_name, last_name FROM employee; select a specific fields of each record of specific table
+-- SELECT id, first_name, last_name FROM employee; select a specific fields of each record of specific table
+-- SELECT id, last_name, first_name FROM employee; select a specific fields of each record of specific table
+-- SELECT * FROM employee WHERE id = 1; select a records of specific table based on a condition
+-- SELECT * FROM employee WHERE id = 1 and first_name = "julia"; select a records of specific table based on a condition
+-- SELECT * FROM employee WHERE id = 1 or first_name = "julia"; select a records of specific table based on a condition
+-- SELECT * FROM employee WHERE hourly_paid >= 15; select a records of specific table based on a condition
+-- SELECT * FROM employee WHERE hire_date = "2024-03-27"; select a records of specific table based on a condition
+-- SELECT * FROM employee WHERE hire_date = "2024-3-27"; select a records of specific table based on a condition
+-- SELECT * FROM employee WHERE hire_date >= "2024-3-27"; select a records of specific table based on a condition
+-- SELECT * FROM employee WHERE hire_date != "2024-3-25"; select a records of specific table based on a condition
+-- SELECT * FROM employee WHERE hire_date IS NULL; select a records of specific table based on a condition
+-- SELECT * FROM employee WHERE hire_date IS NOT NULL; select a records of specific table based on a condition
+-- SELECT first_name FROM employee WHERE hire_date IS NOT NULL; select a records of specific table based on a condition
+
+-------------------------- UPDATE -------------------------
+-- UPDATE employee SET hourly_paid = 10.25; set a specific field to specific value
+-- UPDATE employee SET hourly_paid = 20 WHERE id = 1; set a specific field to specific value based on condition
+-- UPDATE employee SET hourly_paid = 20, hire_date = "2024-3-25" WHERE id = 1; set a specific fields to specific values based on condition
+
+-------------------------- DELETE -------------------------
+-- DELETE FROM employee; remove all recode in a specific table
+-- DELETE FROM employee WHERE id = 1 ; remove a recode in a specific table based on condition
+
+-------------------------- COMMIT - ROLLBACK -------------------------
+--SET AUTOCOMMIT = OFF;
+--COMMIT;
+--ROLLBACK;
+
+-------------------------- CURRENT_TIME() - CURRENT_DATE() - NOW() -------------------------
+-- CREATE TABLE test (
+--    hire_date DATE,
+--    my_time TIME,
+--    my_datetime DATETIME
+-- );
+
+--INSERT INTO employees VALUES(CURRENT_TIME(), CURRENT_DATE(), NOW())
+--INSERT INTO employees VALUES(CURRENT_TIME() + 4, CURRENT_DATE() - 2, NOW() - 5)
+
+
+-------------------------- UNIQUE, NULL -------------------------
+--CREATE TABLE employees (
+--    id INT UNIQUE,
+--    first_name VARCHAR(50) NOT NULL,
+--    last_name VARCHAR(50)
+--);
+--
+--ALTER TABLE employees ADD CONSTRAINT UNIQUE (id);
+--ALTER TABLE employees MODIFY first_name VARCHAR(25) NOT NULL;
+--ALTER TABLE employees ALTER COLUMN first_nam SET NOT NULL;
+
+-------------------------- CHECK -------------------------
+--CREATE TABLE employee (
+--    id INT UNIQUE,
+--    first_name VARCHAR(50) NOT NULL,
+--    last_name VARCHAR(50) NOT NULL,
+--    hourly_paid DECIMAL(5, 2) NOT NULL,
+--    CONSTRAINT chk_hourly_paid CHECK (hourly_paid >= 10.00)
+--);
+--
+--ALTER TABLE employees ADD CONSTRAINT chk_hourly_paid CHECK(hourly_paid >= 10.00);
+--ALTER TABLE employees MODIFY id INT UNIQUE NOT NULL;
+--INSERT INTO employee VALUES(1, "Julia", "Joe", 9.00);
+--ALTER TABLE employees DROP CHECK chk_hourly_paid;
+
+-------------------------- DEFAULT -------------------------
+--CREATE TABLE employee (
+--    id INT UNIQUE,
+--    hire_date DATETIME DEFAULT NOW(),
+--    first_name VARCHAR(50) DEFAULT "UNKNOWN",
+--    last_name VARCHAR(50)  DEFAULT "UNKNOWN"
+--);
+--
+--ALTER TABLE employee ALTER first_name SET DEFAULT;
+--INSERT INTO employee VALUES(1);
+--
+--ALTER TABLE employee ADD hire_date DATETIME DEFAULT NOW();
+-------------------------- PRIMARY KEY -------------------------
+--CREATE TABLE employee (
+--    id INT PRIMARY KEY,
+--    hire_date DATETIME DEFAULT NOW(),
+--    first_name VARCHAR(50) DEFAULT "UNKNOWN",
+--    last_name VARCHAR(50)  DEFAULT "UNKNOWN"
+--);
+--
+--ALTER TABLE employee ADD CONSTRAINT PRIMARY KEY(id);
+--INSERT INTO employee (id) VALUES(1);
+--INSERT INTO employee (id) VALUES(1);
+--INSERT INTO employee (id) VALUES(NULL);
+--ALTER TABLE employee DROP PRIMARY KEY;
+
+-------------------------- AUTOINCREMENT -------------------------
+--CREATE TABLE employee (
+--    id INT PRIMARY KEY AUTO_INCREMENT,
+--    hire_date DATETIME DEFAULT NOW(),
+--    first_name VARCHAR(50) DEFAULT "UNKNOWN",
+--    last_name VARCHAR(50)  DEFAULT "UNKNOWN"
+--);
+--
+--ALTER TABLE employee AUTO_INCREMENT = 1000
+--ALTER TABLE employee AUTO_INCREMENT = 2000
+--INSERT INTO employee () VALUES();
+--INSERT INTO employee () VALUES()
+
+-------------------------- FOREIGN KEY -------------------------
+--CREATE TABLE employee (
+--    id INT PRIMARY KEY AUTO_INCREMENT,
+--    car_id INT,
+--    hire_date DATETIME DEFAULT NOW(),
+--    first_name VARCHAR(50) DEFAULT "UNKNOWN",
+--    last_name VARCHAR(50)  DEFAULT "UNKNOWN",
+--    FOREIGN KEY(car_id) REFERENCES employee_car(id)
+--);
+--
+--CREATE TABLE employee_car (
+--    id INT PRIMARY KEY AUTO_INCREMENT,
+--    model VARCHAR(50) NOT NULL,
+--    color VARCHAR(25) NOT NULL
+--);
+--
+--ALTER TABLE table_name ADD FOREIGN KEY(car_id) REFERENCES employee_car(id);
+--INSERT INTO employee_car (model, color) VALUES("BMW 2020", "BLACK");
+--INSERT INTO employee (car_id) VALUES(1);
+--ALTER TABLE employee DROP FOREIGN KEY car_id;
+
+-------------------------- JOIN -------------------------
+
+--CREATE TABLE employee (
+--    id INT PRIMARY KEY AUTO_INCREMENT,
+--    car_id INT,
+--    hire_date DATETIME DEFAULT NOW(),
+--    first_name VARCHAR(50) DEFAULT "UNKNOWN",
+--    last_name VARCHAR(50)  DEFAULT "UNKNOWN",
+--    FOREIGN KEY(car_id) REFERENCES employee_car(id)
+--);
+--
+--CREATE TABLE employee_car (
+--    id INT PRIMARY KEY AUTO_INCREMENT,
+--    model VARCHAR(50) NOT NULL,
+--    color VARCHAR(25) NOT NULL
+--);
+--
+--SELECT * FROM employee INNER JOIN employee_car ON employee.car_id = employee_car.id
+--SELECT * FROM employee LEFT JOIN employee_car ON employee.car_id = employee_car.id
+--SELECT * FROM employee RIGHT JOIN employee_car ON employee.car_id = employee_car.id
+--SELECT * FROM employee FULL OUTER JOIN employee_car ON employee.car_id = employee_car.id
+--SELECT (id) FROM employee FULL OUTER JOIN employee_car ON employee.car_id = employee_car.id
+
+-------------------------- FUNCTIONS -------------------------
+
+--CREATE TABLE employee (
+--    id INT PRIMARY KEY AUTO_INCREMENT,
+--    car_id INT,
+--    hire_date DATETIME DEFAULT NOW(),
+--    first_name VARCHAR(50) DEFAULT "UNKNOWN",
+--    last_name VARCHAR(50)  DEFAULT "UNKNOWN",
+--    FOREIGN KEY(car_id) REFERENCES employee_car(id)
+--);
+--
+--CREATE TABLE employee_car (
+--    id INT PRIMARY KEY AUTO_INCREMENT,
+--    model VARCHAR(50) NOT NULL,
+--    color VARCHAR(25) NOT NULL
+--);
+--
+--SELECT CONCAT(first_name, " ", last_name) FROM employee;
+--SELECT CONCAT(first_name, " ", last_name) AS full_name FROM employee;
+--SELECT COUNT(id) as car_count FROM employee_car;
+--SELECT SUM(id) as car_count FROM employee_car;
+--SELECT AVG(id) FROM employee_car;
+--SELECT MAX(id) FROM employee_car;
+--SELECT MIN(id) FROM employee_car;
+
+-------------------------- AND, OR, NOT, BETWEEN, IN -------------------------
+--CREATE TABLE employee (
+--    id INT PRIMARY KEY AUTO_INCREMENT,
+--    car_id INT,
+--    hire_date DATETIME DEFAULT NOW(),
+--    first_name VARCHAR(50) DEFAULT "UNKNOWN",
+--    last_name VARCHAR(50)  DEFAULT "UNKNOWN",
+--    FOREIGN KEY(car_id) REFERENCES employee_car(id)
+--);
+--
+--CREATE TABLE employee_car (
+--    id INT PRIMARY KEY AUTO_INCREMENT,
+--    model VARCHAR(50) NOT NULL,
+--    color VARCHAR(25) NOT NULL
+--);
+--
+--SELECT * FROM employee WHERE car_id is NOT NULL AND id = 1 OR id = 3;
+--SELECT * FROM employee WHERE hire_date BETWEEN "2024-3-25" AND "204-3-27";
+--SELECT * FROM employee WHERE id IN (1, 2);
+
+-------------------------- WILDCARDS (%, _) -------------------------
+
+--CREATE TABLE employee (
+--    id INT PRIMARY KEY AUTO_INCREMENT,
+--    car_id INT,
+--    hire_date DATETIME DEFAULT NOW(),
+--    first_name VARCHAR(50) DEFAULT "UNKNOWN",
+--    last_name VARCHAR(50)  DEFAULT "UNKNOWN",
+--    FOREIGN KEY(car_id) REFERENCES employee_car(id)
+--);
+--
+--CREATE TABLE employee_car (
+--    id INT PRIMARY KEY AUTO_INCREMENT,
+--    model VARCHAR(50) NOT NULL,
+--    color VARCHAR(25) NOT NULL
+--);
+--
+--SELECT * FROM employee WHERE first_name LIKE "UN%";
+--SELECT * FROM employee WHERE first_name LIKE "%WN";
+--SELECT * FROM employee WHERE first_name LIKE "__KNOW_";
+
+-------------------------- ORDER (ASC, DESC) -------------------------
+
+--CREATE TABLE employee (
+--    id INT PRIMARY KEY AUTO_INCREMENT,
+--    car_id INT,
+--    hire_date DATETIME DEFAULT NOW(),
+--    first_name VARCHAR(50) DEFAULT "UNKNOWN",
+--    last_name VARCHAR(50)  DEFAULT "UNKNOWN",
+--    FOREIGN KEY(car_id) REFERENCES employee_car(id)
+--);
+--
+--CREATE TABLE employee_car (
+--    id INT PRIMARY KEY AUTO_INCREMENT,
+--    model VARCHAR(50) NOT NULL,
+--    color VARCHAR(25) NOT NULL
+--);
+--
+--SELECT * FROM employee ORDER BY hire_date;
+--SELECT * FROM employee ORDER BY hire_date ASC;
+--SELECT * FROM employee ORDER BY id DESC;
+--SELECT * FROM employee ORDER BY hire_date, id;
+
+-------------------------- LIMIT -------------------------
+
+--CREATE TABLE employee (
+--    id INT PRIMARY KEY AUTO_INCREMENT,
+--    car_id INT,
+--    hire_date DATETIME DEFAULT NOW(),
+--    first_name VARCHAR(50) DEFAULT "UNKNOWN",
+--    last_name VARCHAR(50)  DEFAULT "UNKNOWN",
+--    FOREIGN KEY(car_id) REFERENCES employee_car(id)
+--);
+--
+--CREATE TABLE employee_car (
+--    id INT PRIMARY KEY AUTO_INCREMENT,
+--    model VARCHAR(50) NOT NULL,
+--    color VARCHAR(25) NOT NULL
+--);
+--
+--SELECT * FROM employee LIMIT 3;
+--SELECT * FROM employee ORDER BY car_id DESC LIMIT 3;
+--SELECT * FROM employee  LIMIT 3, 2;
+
+-------------------------- UNION (ALL) -------------------------
+
+--CREATE TABLE employee (
+--    id INT PRIMARY KEY AUTO_INCREMENT,
+--    car_id INT,
+--    hire_date DATETIME DEFAULT NOW(),
+--    first_name VARCHAR(50) DEFAULT "UNKNOWN",
+--    last_name VARCHAR(50)  DEFAULT "UNKNOWN",
+--    FOREIGN KEY(car_id) REFERENCES employee_car(id)
+--);
+--
+--CREATE TABLE employee_car (
+--    id INT PRIMARY KEY AUTO_INCREMENT,
+--    model VARCHAR(50) NOT NULL,
+--    color VARCHAR(25) NOT NULL
+--);
+--
+--SELECT first_name, last_name FROM employee UNION SELECT model, color FROM employee_car
+--SELECT first_name, last_name FROM employee UNION ALL SELECT model, color FROM employee_car
+
+-------------------------- self JOIN -------------------------
+
+--CREATE TABLE employee (
+--    id INT PRIMARY KEY AUTO_INCREMENT,
+--    car_id INT,
+--    hire_date DATETIME DEFAULT NOW(),
+--    first_name VARCHAR(50) DEFAULT "UNKNOWN",
+--    last_name VARCHAR(50)  DEFAULT "UNKNOWN",
+--    FOREIGN KEY(car_id) REFERENCES employee_car(id)
+--);
+--
+--CREATE TABLE employee_car (
+--    id INT PRIMARY KEY AUTO_INCREMENT,
+--    model VARCHAR(50) NOT NULL,
+--    color VARCHAR(25) NOT NULL
+--);
+--
+--SELECT employee1.id, employee1.car_id FROM employee as employee1 INNER JOIN employee as employee2 WHERE employee1.car_id = employee2.car_id;
+
+-------------------------- VIEWS -------------------------
+
+--CREATE TABLE employee (
+--    id INT PRIMARY KEY AUTO_INCREMENT,
+--    car_id INT,
+--    hire_date DATETIME DEFAULT NOW(),
+--    first_name VARCHAR(50) DEFAULT "UNKNOWN",
+--    last_name VARCHAR(50)  DEFAULT "UNKNOWN",
+--    FOREIGN KEY(car_id) REFERENCES employee_car(id)
+--);
+--
+--CREATE TABLE employee_car (
+--    id INT PRIMARY KEY AUTO_INCREMENT,
+--    model VARCHAR(50) NOT NULL,
+--    color VARCHAR(25) NOT NULL
+--);
+--
+--CREATE VIEW employee_names AS SELECT first_name, last_name FROM employee;
+--INSERT INTO employee (first_name, last_name) VALUES("Roth", "Joe");
+--ALTER TABLE employee DROP COLUMN first_name;
+
+-------------------------- INDEXES -------------------------
+--CREATE TABLE employee (
+--    id INT PRIMARY KEY AUTO_INCREMENT,
+--    hire_date DATETIME DEFAULT NOW(),
+--    first_name VARCHAR(50) DEFAULT "UNKNOWN",
+--    last_name VARCHAR(50)  DEFAULT "UNKNOWN"
+--);
+--
+--SHOW INDEXES FROM employee;
+--CREATE INDEX last_name_idx ON employee(first_name);
+--CREATE INDEX first_name_last_name_idx ON employee(first_name, last_name);
+--ALTER TABLE employee DROP INDEX first_name_last_name_idx;
+
+-------------------------- SUBQUERIES, DISTINCT -------------------------
+
+--CREATE TABLE employee (
+--    id INT PRIMARY KEY AUTO_INCREMENT,
+--    hire_date DATETIME DEFAULT NOW(),
+--    first_name VARCHAR(50) DEFAULT "UNKNOWN",
+--    last_name VARCHAR(50)  DEFAULT "UNKNOWN"
+--);
+--
+--ALTER TABLE employee ADD COLUMN hourly_paid DECIMAL(5, 2) NOT NULL DEFAULT 0.00,
+--
+--UPDATE employee SET hourly_paid = 25.50 WHERE id= 1;
+--UPDATE employee SET hourly_paid = 20.50 WHERE id= 2;
+--
+--SELECT AVG(hourly_paid) FROM employee;
+--
+--SELECT first_name, last_name, hourly_paid,
+--(SELECT AVG(hourly_paid) FROM employee) as avg_hourly_paid
+--FROM employee;
+--
+--SELECT DISTINCT first_name, last_name, hourly_paid
+--FROM employee WHERE
+--hourly_paid > (SELECT AVG(hourly_paid) FROM employee);
+
+-------------------------- GROUP BY, HAVING -------------------------
+
+--CREATE TABLE employee (
+--    id INT PRIMARY KEY AUTO_INCREMENT,
+--    hire_date DATETIME DEFAULT NOW(),
+--    first_name VARCHAR(50) DEFAULT "UNKNOWN",
+--    last_name VARCHAR(50)  DEFAULT "UNKNOWN"
+--);
+--ALTER TABLE employee ADD COLUMN hourly_paid DECIMAL(5, 2) NOT NULL DEFAULT 0.00,
+--
+--SELECT SUM(hourly_paid), hire_date FROM employee GROUP BY hire_date HAVING AVG(hourly_paid) > 20;
+--SELECT MAX(hourly_paid), hire_date FROM employee GROUP BY hire_date;
+
+-------------------------- ROLLUP -------------------------
+--CREATE TABLE employee (
+--    id INT PRIMARY KEY AUTO_INCREMENT,
+--    hire_date DATETIME DEFAULT NOW(),
+--    first_name VARCHAR(50) DEFAULT "UNKNOWN",
+--    last_name VARCHAR(50)  DEFAULT "UNKNOWN"
+--);
+--
+--SELECT hire_date, AVG(hourly_paid) FROM employee GROUP BY hire_date WITH ROLLUP;
+
+-------------------------- DELETE ON  FOREIGN KEY -------------------------
+
+--CREATE TABLE employee (
+--    id INT PRIMARY KEY AUTO_INCREMENT,
+--    car_id INT,
+--    hire_date DATETIME DEFAULT NOW(),
+--    first_name VARCHAR(50) DEFAULT "UNKNOWN",
+--    last_name VARCHAR(50)  DEFAULT "UNKNOWN",
+--    FOREIGN KEY(car_id) REFERENCES employee_car(id)
+--);
+--
+--CREATE TABLE employee_car (
+--    id INT PRIMARY KEY AUTO_INCREMENT,
+--    model VARCHAR(50) NOT NULL,
+--    color VARCHAR(25) NOT NULL
+--);
+--
+--ALTER TABLE employee ADD CONSTRAINT car_id FOREIGN KEY(car_id) REFERENCES employee_car(id)
+--ON DELETE SET NULL;
+--
+--ALTER TABLE employee MODIFY CONSTRAINT car_id FOREIGN KEY(car_id) REFERENCES employee_car(id)
+--ON DELETE CASCADE;
+--
+--INSERT INTO employee_car(model, color) VALUES("2020", "BLACK");
+--INSERT INTO employee (car_id, first_name, last_name) VALUES(1, "Julia", "Joe");
+
+
+-------------------------- STORED PROCEDURE -------------------------
+--CREATE TABLE employee (
+--    id INT PRIMARY KEY AUTO_INCREMENT,
+--    car_id INT,
+--    hire_date DATETIME DEFAULT NOW(),
+--    first_name VARCHAR(50) DEFAULT "UNKNOWN",
+--    last_name VARCHAR(50)  DEFAULT "UNKNOWN",
+--    FOREIGN KEY(car_id) REFERENCES employee_car(id)
+--);
+--
+--CREATE TABLE employee_car (
+--    id INT PRIMARY KEY AUTO_INCREMENT,
+--    model VARCHAR(50) NOT NULL,
+--    color VARCHAR(25) NOT NULL
+--);
+--
+--
+--DELIMITER $$
+--CREATE PROCEDURE get_employee(IN em_id INT)
+--BEGIN
+--    SELECT * FROM employee WHERE id = em_id;
+--END $$
+--DELIMITER ;
+--
+--CALL get_employee(id);
+--DROP PROCEDURE get_employee();
+--SHOW CREATE PROCEDURE get_employee
+--SHOW PROCEDURE STATUS WHERE db = "myDB";
+
+-------------------------- TRIGGERS -------------------------
+--CREATE TABLE employee (
+--    id INT PRIMARY KEY AUTO_INCREMENT,
+--    salary DECIMAL(10, 2) NOT NULL,
+--    hourly_paid DECIMAL(4, 2) NOT NULL,
+--    hire_date DATETIME DEFAULT NOW(),
+--    first_name VARCHAR(50) DEFAULT "UNKNOWN",
+--    last_name VARCHAR(50)  DEFAULT "UNKNOWN"
+--);
+--
+--CREATE TRIGGER before_update_hourly_paid BEFORE UPDATE ON employee FOR EACH ROW SET NEW.salary = (NEW.hourly_paid * 20);
+--CREATE TRIGGER after_update_hourly_paid AFTER UPDATE ON employee FOR EACH ROW SET OLD.salary = (OLD.hourly_paid * 20);
+--
+--SHOW TRIGGERS;
+--DROP TRIGGER before_update_hourly_paid;
