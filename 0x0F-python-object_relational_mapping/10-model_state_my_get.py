@@ -65,10 +65,11 @@ if __name__ == "__main__":
     state = (
         State.query
         .filter(State.name.like(state_name))
+        .first()
     )
 
     # Print the state's ID if found, otherwise print "Not found"
     if state:
-        print(state.first().id)
+        print(state.id)
     else:
         print("Not found")
