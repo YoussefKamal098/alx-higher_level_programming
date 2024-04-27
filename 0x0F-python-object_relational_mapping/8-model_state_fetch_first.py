@@ -7,8 +7,8 @@ database using provided credentials, and queries the first state from
 the database.
 
 It imports SQLAlchemy's create_engine, scoped_session, and sessionmaker to
-establish a connection to the database, and imports the Base and
-State classes from the model_state module.
+establish a connection to the database, and imports the Base and State
+classes from the model_state module.
 
 Usage:
     Run this module with the following command-line arguments:
