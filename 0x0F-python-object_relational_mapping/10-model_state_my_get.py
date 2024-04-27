@@ -11,7 +11,7 @@ and state name as command-line arguments.
 It then establishes a connection to the MySQL database,
 creates a scoped session with SQLAlchemy,
 and queries the 'states' table for a state with
-a name containing the letter 'a'.
+<state_name>
 If a matching state is found, it prints its ID. Otherwise,
 it prints "Not found".
 
@@ -61,11 +61,10 @@ if __name__ == "__main__":
     # Create tables if they don't exist
     Base.metadata.create_all(engine)
 
-    # Query for a state with a name containing 'a'
+    # Query for a state with a name <state_name>
     state = (
         State.query
-        .filter(State.name.like(f"%{state_name}%"))
-        .order_by(State.id)
+        .filter(State.name.like(state_name))
     )
 
     # Print the state's ID if found, otherwise print "Not found"
