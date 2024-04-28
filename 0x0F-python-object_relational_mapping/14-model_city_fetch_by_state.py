@@ -63,12 +63,12 @@ if __name__ == "__main__":
 
     # Query for all City objects with associated State names
     cities = (
-        State.query
-        .join(City, City.state_id == State.id)
+        City.query
+        .join(State, City.state_id == State.id)
         .with_entities(City.name, City.id, State.name.label("state_name"))
         .order_by(City.id)
     )
 
     # Print each city with its associated state name
     for city in cities:
-        print(f"{city.state_name} : ({city.id}) {city.name}")
+        print(f"{city.state_name}: ({city.id}) {city.name}")
