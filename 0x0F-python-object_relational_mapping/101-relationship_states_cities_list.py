@@ -60,16 +60,7 @@ if __name__ == "__main__":
     # Create tables if they don't exist
     Base.metadata.create_all(engine)
 
-    # Retrieve states along with their associated cities using joinedload
-    states = (
-        State.query
-        .options(joinedload(State.cities))
-        .order_by(State.id)
-        .all()
-    )
-
-    # Print retrieved data
-    for state in states:
-        print(state.id, state.name, sep=": ")
+    for state in session.query(State).order_by(State.id):
+        print("{}: {}".format(state.id, state.name))
         for city in state.cities:
-            print(f"\t{city.id}: {city.name}")
+            print("\t{}: {}".format(city.id, city.name))
