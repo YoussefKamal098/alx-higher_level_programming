@@ -42,7 +42,7 @@ if __name__ == "__main__":
                         f"@localhost:3306/{database_name}"
 
     # Create SQLAlchemy engine
-    engine = create_engine(connection_string, echo=True)
+    engine = create_engine(connection_string)
 
     # Create a scoped session
     session = scoped_session(
