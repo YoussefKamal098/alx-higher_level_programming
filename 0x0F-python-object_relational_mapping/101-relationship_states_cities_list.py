@@ -29,6 +29,7 @@ import sys
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker, joinedload
 
+from relationship_city import City
 from relationship_state import Base, State
 
 if __name__ == "__main__":
@@ -71,5 +72,4 @@ if __name__ == "__main__":
     for state in states:
         print(state.id, state.name, sep=": ")
         for city in state.cities:
-            print("    ", end="")
-            print(city.id, city.name, sep=": ")
+            print(f"\t{city.id}: {city.name}")
