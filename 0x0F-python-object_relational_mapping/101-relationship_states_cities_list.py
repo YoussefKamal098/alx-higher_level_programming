@@ -61,9 +61,17 @@ if __name__ == "__main__":
     Base.metadata.create_all(engine)
 
     # Retrieve states along with their associated cities using joinedload
+    # states = (
+    #     State.query
+    #     .options(joinedload(State.cities))
+    #     .order_by(State.id)
+    #     .all()
+    # )
+
+    # Retrieve states along with their associated cities
     states = (
         State.query
-        .options(joinedload(State.cities))
+        .join(State.cities)
         .order_by(State.id)
         .all()
     )
