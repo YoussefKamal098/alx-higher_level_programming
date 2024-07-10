@@ -50,6 +50,6 @@ if __name__ == "__main__":
         if not json_response:
             print("No result")
         else:
-            print(f"[{response.get('id')}] {response.get('name')}")
+            print(f"[{json_response.get('id')}] {json_response.get('name')}")
     except ValueError:
         print("Not a valid JSON")
