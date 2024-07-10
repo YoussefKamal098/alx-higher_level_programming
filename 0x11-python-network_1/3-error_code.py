@@ -32,6 +32,3 @@ if __name__ == "__main__":
 
     except HTTPError as e:
         print('Error code: ', e.code)
-    except URLError as e:
-        print('We failed to reach a server.')
-        print('Reason: ', e.reason)
