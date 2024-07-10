@@ -49,7 +49,6 @@ if __name__ == "__main__":
 
     response = requests.get(url)
     commits = response.json()
-    print(commits[0])
     try:
         for i in range(10):
             print(f"{commits[i].get('sha')}: "
