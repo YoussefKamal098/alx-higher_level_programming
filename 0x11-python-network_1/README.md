@@ -1,5 +1,5 @@
-Certainly! Let's enhance the README file with specific examples for each argument and keyword argument (`kwargs`) used
-in both `requests` and `urllib` modules in Python.
+Certainly! Let's enhance the README file by adding details about request and response methods and attributes for
+the `requests` module.
 
 ---
 
@@ -13,15 +13,16 @@ features and levels of abstraction to suit different needs.
 ### Table of Contents
 
 1. [Requests Module](#requests-module)
-    - [Common Arguments and Keyword Arguments](#common-arguments-requests)
-    - [Example Usage](#example-usage-requests)
-    - [Error Handling](#error-handling-requests)
-    - [Sessions and More Features](#sessions-requests)
+   - [Common Arguments and Keyword Arguments](#common-arguments-requests)
+   - [Example Usage](#example-usage-requests)
+   - [Error Handling](#error-handling-requests)
+   - [Sessions and More Features](#sessions-requests)
+   - [Request and Response Methods and Attributes](#request-response-methods-requests)
 2. [Urllib Module](#urllib-module)
-    - [Common Classes and Functions](#common-classes-urllib)
-    - [Example Usage](#example-usage-urllib)
-    - [Error Handling](#error-handling-urllib)
-    - [Sessions and More Features](#sessions-urllib)
+   - [Common Classes and Functions](#common-classes-urllib)
+   - [Example Usage](#example-usage-urllib)
+   - [Error Handling](#error-handling-urllib)
+   - [Sessions and More Features](#sessions-urllib)
 3. [Conclusion](#conclusion)
 
 ---
@@ -60,9 +61,9 @@ The `requests` module in Python allows sending HTTP requests with ease.
 import requests
 
 response = requests.get(
-    'https://api.example.com/data',
-    params={'key1': 'value1', 'key2': 'value2'},
-    headers={'Authorization': 'Bearer YOUR_TOKEN'}
+   'https://api.example.com/data',
+   params={'key1': 'value1', 'key2': 'value2'},
+   headers={'Authorization': 'Bearer YOUR_TOKEN'}
 )
 print(response.json())
 ```
@@ -73,8 +74,8 @@ print(response.json())
 import requests
 
 response = requests.post(
-    'https://api.example.com/data',
-    json={'key1': 'value1', 'key2': 'value2'}
+   'https://api.example.com/data',
+   json={'key1': 'value1', 'key2': 'value2'}
 )
 print(response.status_code)
 print(response.json())
@@ -88,14 +89,14 @@ Handle exceptions like connection errors and HTTP errors:
 import requests
 
 try:
-    response = requests.get('https://api.example.com/data')
-    response.raise_for_status()  # Raise HTTPError for bad responses
+   response = requests.get('https://api.example.com/data')
+   response.raise_for_status()  # Raise HTTPError for bad responses
 except requests.exceptions.HTTPError as http_err:
-    print(f'HTTP error occurred: {http_err}')
+   print(f'HTTP error occurred: {http_err}')
 except requests.exceptions.ConnectionError as conn_err:
-    print(f'Connection error occurred: {conn_err}')
+   print(f'Connection error occurred: {conn_err}')
 except requests.exceptions.RequestException as req_err:
-    print(f'Request error occurred: {req_err}')
+   print(f'Request error occurred: {req_err}')
 ```
 
 ### Sessions and More Features <a name="sessions-requests"></a>
@@ -205,10 +206,10 @@ print(response.json())
 import requests
 
 try:
-    response = requests.get('https://api.example.com/data', timeout=5)
-    print(response.json())
+   response = requests.get('https://api.example.com/data', timeout=5)
+   print(response.json())
 except requests.exceptions.Timeout:
-    print('Request timed out')
+   print('Request timed out')
 ```
 
 ##### Example with `allow_redirects`
@@ -226,8 +227,8 @@ print(response.status_code)
 import requests
 
 proxies = {
-    'http': 'http://10.10.1.10:3128',
-    'https': 'http://10.10.1.10:1080'
+   'http': 'http://10.10.1.10:3128',
+   'https': 'http://10.10.1.10:1080'
 }
 response = requests.get('https://api.example.com/data', proxies=proxies)
 print(response.json())
@@ -260,6 +261,54 @@ response = requests.get('https://api.example.com/data', cert=('/path/client.cert
 print(response.json())
 ```
 
+### Request and Response Methods and Attributes <a name="request-response-methods-requests"></a>
+
+#### Request Methods
+
+- **requests.get(url, **kwargs)**: Sends a GET request.
+- **requests.post(url, **kwargs)**: Sends a POST request.
+- **requests.put(url, **kwargs)**: Sends a PUT request.
+- **requests.delete(url, **kwargs)**: Sends a DELETE request.
+- **requests.head(url, **kwargs)**: Sends a HEAD request.
+- **requests.options(url, **kwargs)**: Sends an OPTIONS request.
+- **requests.patch(url, **kwargs)**: Sends a PATCH request.
+
+Example:
+
+```python
+import requests
+
+response = requests.put('https://httpbin.org/put', data={'key': 'value'})
+print(response.status_code)
+print(response.json())
+```
+
+#### Response Attributes
+
+- **response.status_code**: The HTTP status code.
+- **response.headers**: Dictionary of response headers.
+- **response.text**: The content of the response, in unicode.
+- **response.content**: The content of the response, in bytes.
+- **response.json()**: A method to parse the JSON content.
+- **response.url**: The final URL location of the response.
+- **response.history**: A list of response objects from redirects.
+- **response.elapsed**: The time elapsed between sending the request and the arrival of the response.
+
+Example:
+
+```python
+import requests
+
+response = requests.get('https://api.example.com/data')
+print(f'Status Code: {response.status_code}')
+print(f'Headers: {response.headers}')
+print(f'Content: {response.text}')
+print(f'JSON: {response.json()}')
+print(f'URL: {response.url}')
+print(f'History: {response.history}')
+print(f'Elapsed Time: {response.elapsed}')
+```
+
 ---
 
 ## Urllib Module <a name="urllib-module"></a>
@@ -271,7 +320,10 @@ The `urllib` module provides a lower-level interface for making HTTP requests.
 #### `urllib.request.urlopen(url, data=None, [timeout, ]*, cafile=None, capath=None, cadefault=False, context=None)`
 
 - **url**: The URL to be opened.
-- **data**: (optional) Data to be sent as a POST request.
+- **data**: (optional
+
+) Data to be sent as a POST request.
+
 - **timeout**: (optional) Timeout in seconds for blocking operations.
 - **cafile**: (optional) Path to a file of concatenated CA certificates.
 - **capath**: (optional) Path to a directory containing CA certificates.
@@ -309,14 +361,14 @@ import urllib.request
 import urllib.error
 
 try:
-    response = urllib.request.urlopen('https://api.example.com/data')
-    print(response.read().decode('utf-8'))
+   response = urllib.request.urlopen('https://api.example.com/data')
+   print(response.read().decode('utf-8'))
 except urllib.error.HTTPError as http_err:
-    print(f'HTTP error occurred: {http_err.code}')
+   print(f'HTTP error occurred: {http_err.code}')
 except urllib.error.URLError as url_err:
-    print(f'URL error occurred: {url_err.reason}')
+   print(f'URL error occurred: {url_err.reason}')
 except Exception as e:
-    print(f'Other error occurred: {str(e)}')
+   print(f'Other error occurred: {str(e)}')
 ```
 
 ### Sessions and More Features <a name="sessions-urllib"></a>
@@ -329,14 +381,12 @@ Manage cookies with `http.cookiejar` and `urllib.request`:
 import urllib.request
 import http.cookiejar
 
-cookie_jar = http
-
-.cookiejar.CookieJar()
+cookie_jar = http.cookiejar.CookieJar()
 opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cookie_jar))
 
 response = opener.open('https://httpbin.org/cookies/set?name=value')
 for cookie in cookie_jar:
-    print(f'Cookie: {cookie.name}={cookie.value}')
+   print(f'Cookie: {cookie.name}={cookie.value}')
 ```
 
 #### Custom Headers and Parameters
@@ -373,10 +423,10 @@ print(response.read().decode('utf-8'))
 import urllib.request
 
 try:
-    response = urllib.request.urlopen('https://api.example.com/data', timeout=5)
-    print(response.read().decode('utf-8'))
+   response = urllib.request.urlopen('https://api.example.com/data', timeout=5)
+   print(response.read().decode('utf-8'))
 except urllib.error.URLError as e:
-    print(f'URLError occurred: {e.reason}')
+   print(f'URLError occurred: {e.reason}')
 ```
 
 ##### Example with `cafile` and `capath`
