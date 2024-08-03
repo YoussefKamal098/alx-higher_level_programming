@@ -55,10 +55,10 @@ function fetchData (url) {
 async function countMoviesWithCharacterId (url, characterId) {
   try {
     const data = await fetchData(url);
-    const movies = JSON.parse(data)['results'];
+    const movies = JSON.parse(data).results;
 
     return movies.reduce((count, currMovie) => {
-      return count + currMovie['characters'].reduce((count, currCharacter) => {
+      return count + currMovie.characters.reduce((count, currCharacter) => {
         return count + (currCharacter.includes(characterId) ? 1 : 0);
       }, 0);
     }, 0);
