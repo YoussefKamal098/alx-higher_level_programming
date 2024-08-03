@@ -6,8 +6,9 @@
  * 1. Validates that the API URL is provided as a command-line argument.
  * 2. Fetches data from the specified URL.
  * 3. Groups the fetched task data by user ID.
- * 4. Transforms the grouped data to count the number of tasks per user.
- * 5. Outputs the task counts per user to the console.
+ * 4. Filter out uncompleted tasks for each group.
+ * 4. Transforms the grouped data to count the number of completed tasks per user.
+ * 5. Outputs the completed task counts per user to the console.
  *
  * Usage:
  *    node script_name.js <API_URL>
@@ -90,6 +91,11 @@ async function getTasksCountByUser (url) {
     const data = await fetchData(url);
     const tasks = JSON.parse(data);
     const groupedTasks = groupBy(tasks, task => task.userId);
+
+    for (const key in groupedTasks) {
+        groupedTasks[key] = groupedTasks[key].filter(task => task.completed);
+    }
+
     return transformValues(groupedTasks, tasks => tasks.length);
   } catch (error) {
     console.error('Error:', error.message);
