@@ -80,7 +80,20 @@ function transformValues (obj, transformer) {
 }
 
 /**
- * Fetches tasks data and calculates the number of tasks per user.
+ * Filters an object based on a provided callback function.
+ *
+ * @param {Object} obj - The object to be filtered.
+ * @param {Function} callback - The callback function to determine if a key-value pair should be included.
+ * @returns {Object} - A new object with the filtered key-value pairs.
+ */
+function filterObject (obj, callback) {
+  return Object.fromEntries(
+    Object.entries(obj).filter(([key, value]) => callback(key, value))
+  );
+}
+
+/**
+ * Fetches tasks data and calculates the number of completed tasks per user.
  *
  * @param {string} url - The URL to fetch tasks data from.
  * @returns {Promise<Object>} - A promise that resolves to an
@@ -91,12 +104,15 @@ async function getTasksCountByUser (url) {
     const data = await fetchData(url);
     const tasks = JSON.parse(data);
     const groupedTasks = groupBy(tasks, task => task.userId);
+    let userCompletedTasks = {};
 
     for (const key in groupedTasks) {
-        groupedTasks[key] = groupedTasks[key].filter(task => task.completed);
+      userCompletedTasks[key] = groupedTasks[key].filter(task => task.completed);
     }
 
-    return transformValues(groupedTasks, tasks => tasks.length);
+    userCompletedTasks = transformValues(userCompletedTasks, tasks => tasks.length);
+
+    return filterObject(userCompletedTasks, (userId, completedTasks) => completedTasks !== 0);
   } catch (error) {
     console.error('Error:', error.message);
     return {};
