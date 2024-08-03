@@ -29,8 +29,6 @@ request(url, (error, response, body) => {
   // Parse the JSON response body
   const movie = JSON.parse(body);
 
-  console.log(movie);
-
   // Print the movie title
   console.log(movie.title);
 });
