@@ -56,7 +56,7 @@ function writeToFile (filepath, content) {
     if (err) {
       console.error(`Error writing to file: ${err.message}`);
     } else {
-      console.log('Content has been written successfully!');
+      // console.log('Content has been written successfully!');
     }
   });
 }
@@ -65,5 +65,5 @@ function writeToFile (filepath, content) {
 fetchData(STAR_WAR_API).then(data => {
   writeToFile(FILE_PATH, data);
 }).catch(err => {
-    console.error(`Error: ${err.message}`)
+  console.error(`Error: ${err.message}`);
 });
